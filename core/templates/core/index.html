@@ -8,7 +8,9 @@
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    {% load static %}
+    <!-- Update CSS link to use static tag -->
+    <link rel="stylesheet" href="{% static 'shared/css/main.css' %}" />
   </head>
   <body>
     <!-- Header -->
@@ -39,7 +41,11 @@
         <article class="item">
           <header>
             <a href="#"
-              ><img src="images/pic01_1.jpg" alt="" width="800" height="400"
+              ><img
+                src="{% static 'core/images/pic01_1.jpg' %}"
+                alt=""
+                width="800"
+                height="400"
             /></a>
             <h3>Beginner Yoga Series</h3>
           </header>
@@ -54,7 +60,11 @@
         <article class="item">
           <header>
             <a href="#"
-              ><img src="images/pic02_1.jpg" alt="" width="800" height="400"
+              ><img
+                src="{% static 'core/images/pic02_1.jpg' %}"
+                alt=""
+                width="800"
+                height="400"
             /></a>
             <h3>Yoga for Flexibility</h3>
           </header>
@@ -69,7 +79,11 @@
         <article class="item">
           <header>
             <a href="#"
-              ><img src="images/pic03_1.jpg" alt="" width="800" height="400"
+              ><img
+                src="{% static 'core/images/pic03_1.jpg' %}"
+                alt=""
+                width="800"
+                height="400"
             /></a>
             <h3>Mindfulness & Meditation</h3>
           </header>
@@ -84,7 +98,11 @@
         <article class="item">
           <header>
             <a href="#"
-              ><img src="images/pic04_1.jpg" alt="" width="800" height="400"
+              ><img
+                src="{% static 'core/images/pic04_1.jpg' %}"
+                alt=""
+                width="800"
+                height="400"
             /></a>
             <h3>Advanced Yoga Workshops</h3>
           </header>
@@ -149,9 +167,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{% static 'shared/js/jquery.min.js' %}"></script>
+    <script src="{% static 'shared/js/skel.min.js' %}"></script>
+    <script src="{% static 'shared/js/util.js' %}"></script>
+    <script src="{% static 'shared/js/main.js' %}"></script>
   </body>
 </html>
