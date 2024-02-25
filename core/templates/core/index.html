@@ -1,5 +1,7 @@
-<!DOCTYPE html>
+{% extends 'shared/base.html' %} {% load static %} {% block title %}Namasdre -
+Yoga & Wellness{% endblock %} {% block content %} {% comment %} <!DOCTYPE html>
 <html>
+  {% endcomment %} {% comment %}
   <head>
     <title>Namasdre - Yoga & Wellness</title>
     <meta charset="utf-8" />
@@ -9,10 +11,10 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% load static %}
-    <!-- Update CSS link to use static tag -->
     <link rel="stylesheet" href="{% static 'shared/css/main.css' %}" />
   </head>
   <body>
+    {% endcomment %}
     <!-- Header -->
     <header id="header" class="alt">
       <div class="inner">
@@ -166,10 +168,14 @@
       </footer>
     </div>
 
+    {% endblock %} {% comment %}
     <!-- Scripts -->
     <script src="{% static 'shared/js/jquery.min.js' %}"></script>
     <script src="{% static 'shared/js/skel.min.js' %}"></script>
     <script src="{% static 'shared/js/util.js' %}"></script>
     <script src="{% static 'shared/js/main.js' %}"></script>
+    {% endcomment %} {% comment %}
   </body>
+  {% endcomment %} {% comment %}
 </html>
+{% endcomment %}

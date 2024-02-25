@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Namasdre - Yoga & Wellness{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'shared/css/main.css' %}" />
+    <!-- Additional shared CSS or JS files can be included here -->
+  </head>
+  <body>
+    <!-- Placeholder for Navbar -->
+    <nav>
+      <!-- Placeholder content or future navbar code -->
+    </nav>
+
+    {% block content %}
+    <!-- This block will be overridden by child templates -->
+    {% endblock %}
+
+    <!-- Scripts -->
+    <script src="{% static 'shared/js/jquery.min.js' %}"></script>
+    <script src="{% static 'shared/js/skel.min.js' %}"></script>
+    <script src="{% static 'shared/js/util.js' %}"></script>
+    <script src="{% static 'shared/js/main.js' %}"></script>
+  </body>
+</html>
