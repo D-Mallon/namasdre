@@ -1411,7 +1411,7 @@ table.alt tbody tr td {
   flex-direction: column;
   padding: 8em 0 6em 0;
   /* background-image: url("../../images/banner.jpg"); */
-  background-image: url("../../images/hero.jpg");
+  background-image: url("/static/core/images/hero.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
