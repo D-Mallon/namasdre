@@ -1559,6 +1559,78 @@ body.is-loading #header.alt .inner {
   }
 }
 
+/* NavBar */
+
+#navbar {
+  height: 0;
+  padding: 0;
+  width: 100%;
+  background: #333; /* Dark background color */
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0 20px; */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#hamburger-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px; /* Hamburger icon width */
+  height: 21px; /* Hamburger icon height */
+}
+
+#hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 3px;
+}
+
+#menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: #333;
+  position: fixed;
+  top: 0;
+  right: -100%; /* Start off-screen */
+  width: 50%; /* Menu width */
+  height: 100vh;
+  margin: 0;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  transition: right 0.5s ease;
+}
+
+#menu li {
+  margin: 10px 0;
+}
+
+#menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+/* Screen smaller than 600px */
+@media (max-width: 600px) {
+  #menu {
+    width: 100%; /* Full width on small screens */
+  }
+}
+
 /* Main */
 
 #main {
