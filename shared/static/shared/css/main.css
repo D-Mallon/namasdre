@@ -1618,14 +1618,17 @@ body.is-loading #header.alt .inner {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background: #333;
+  /* background: #333; */
+  background: rgba(3, 3, 3, 0.8);
   position: fixed;
   top: 0;
   right: -100%; /* Start off-screen */
-  width: 50%; /* Menu width */
+  width: 30%; /* Menu width */
   height: 100vh;
   margin: 0;
-  padding: 60px 20px;
+  /* padding: 60px 20px; */
+  /* padding: 100px 20px; */
+  padding: 100px 40px;
   box-sizing: border-box;
   transition: right 0.5s ease;
 }
@@ -1638,6 +1641,8 @@ body.is-loading #header.alt .inner {
   color: #fff;
   text-decoration: none;
   font-size: 1.2em;
+  text-align: right;
+  white-space: nowrap; /* prevent text from wrapping */
 }
 
 /* Screen smaller than 600px */
