@@ -1578,23 +1578,39 @@ body.is-loading #header.alt .inner {
 }
 
 #hamburger-icon {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
-  cursor: pointer;
+  width: 32px;
+  height: 32px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  width: 30px; /* Hamburger icon width */
-  height: 21px; /* Hamburger icon height */
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 5;
+}
+
+@media (min-width: 768px) {
+  #hamburger-icon {
+    top: 30px;
+    right: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #hamburger-icon {
+    top: 40px;
+    right: 40px;
+  }
 }
 
 #hamburger-icon span {
   display: block;
-  height: 3px;
+  height: 8px; /* increase the height */
   width: 100%;
-  background: #fff;
-  border-radius: 3px;
+  background: #f4f4f4;
+  border: 2px solid black; /* increase the border thickness */
+  border-radius: 10px;
 }
 
 #menu {
