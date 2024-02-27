@@ -1,135 +1,119 @@
 {% extends 'shared/base.html' %} {% load static %} {% block title %}Namasdre -
-Yoga & Wellness{% endblock %} {% block content %} {% comment %} <!DOCTYPE html>
-<html>
-  {% endcomment %} {% comment %}
-  <head>
-    <title>Namasdre - Yoga & Wellness</title>
-    <meta charset="utf-8" />
-    <meta
-      name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'shared/css/main.css' %}" />
-  </head>
-  <body>
-    {% endcomment %}
-    <!-- Header -->
-    <header id="header" class="alt">
-      <div class="inner">
-        <h1>Namasdre</h1>
-        <p>Enhancing Your Mind-Body Connection Through Yoga</p>
-      </div>
-    </header>
-    <!-- Wrapper -->
-    <div id="wrapper">
-      <!-- Banner -->
-      <section id="intro" class="main">
-        <span class="icon fa-diamond major"></span>
-        <h2>Welcome to Namasdre</h2>
-        <p>
-          Discover the transformative power of yoga and meditation. Join us on a
-          journey to inner peace,<br />
-          improved strength, and enhanced flexibility. Explore our range of
-          classes tailored for all levels.
-        </p>
-        <ul class="actions">
-          <li><a href="#" class="button big">Discover More</a></li>
-        </ul>
-      </section>
-      <!-- Items -->
-      <section class="main items">
-        <article class="item">
-          <header>
-            <a href="#"
-              ><img
-                src="{% static 'core/images/pic01_1.jpg' %}"
-                alt=""
-                width="800"
-                height="400"
-            /></a>
-            <h3>Beginner Yoga Series</h3>
-          </header>
-          <p>
-            Start your yoga journey with our beginner series. Learn the basics
-            of yoga postures, breathing techniques, and mindfulness meditation.
-          </p>
-          <ul class="actions">
-            <li><a href="#" class="button">Learn More</a></li>
-          </ul>
-        </article>
-        <article class="item">
-          <header>
-            <a href="#"
-              ><img
-                src="{% static 'core/images/pic02_1.jpg' %}"
-                alt=""
-                width="800"
-                height="400"
-            /></a>
-            <h3>Yoga for Flexibility</h3>
-          </header>
-          <p>
-            Enhance your flexibility and range of motion with targeted yoga
-            sequences. Perfect for all levels looking to deepen their practice.
-          </p>
-          <ul class="actions">
-            <li><a href="#" class="button">Discover How</a></li>
-          </ul>
-        </article>
-        <article class="item">
-          <header>
-            <a href="#"
-              ><img
-                src="{% static 'core/images/pic03_1.jpg' %}"
-                alt=""
-                width="800"
-                height="400"
-            /></a>
-            <h3>Mindfulness & Meditation</h3>
-          </header>
-          <p>
-            Explore mindfulness and meditation classes to reduce stress, improve
-            mental clarity, and achieve a state of peace and well-being.
-          </p>
-          <ul class="actions">
-            <li><a href="#" class="button">Find Peace</a></li>
-          </ul>
-        </article>
-        <article class="item">
-          <header>
-            <a href="#"
-              ><img
-                src="{% static 'core/images/pic04_1.jpg' %}"
-                alt=""
-                width="800"
-                height="400"
-            /></a>
-            <h3>Advanced Yoga Workshops</h3>
-          </header>
-          <p>
-            Deepen your practice with our advanced workshops focusing on
-            specific asanas, pranayama techniques, and yoga philosophy.
-          </p>
-          <ul class="actions">
-            <li><a href="#" class="button">Advance Your Practice</a></li>
-          </ul>
-        </article>
-      </section>
-      <!-- CTA -->
-      <section id="cta" class="main special">
-        <h2>Join Our Community</h2>
-        <p>
-          Be a part of our vibrant yoga community. Sign up today to start your
-          wellness journey and gain unlimited access to our yoga videos and
-          resources.
-        </p>
-        <ul class="actions">
-          <li><a href="#" class="button big">Get Started</a></li>
-        </ul>
-      </section>
-      <!-- Main --><!--
+Yoga & Wellness{% endblock %} {% block content %}
+<header id="header" class="alt">
+  <div class="inner">
+    <h1>Namasdre</h1>
+    <p>Enhancing Your Mind-Body Connection Through Yoga</p>
+  </div>
+</header>
+<!-- Wrapper -->
+<div id="wrapper">
+  <!-- Banner -->
+  <section id="intro" class="main">
+    <span class="icon fa-diamond major"></span>
+    <h2>Welcome to Namasdre</h2>
+    <p>
+      Discover the transformative power of yoga and meditation. Join us on a
+      journey to inner peace,<br />
+      improved strength, and enhanced flexibility. Explore our range of classes
+      tailored for all levels.
+    </p>
+    <ul class="actions">
+      <li><a href="#" class="button big">Discover More</a></li>
+    </ul>
+  </section>
+  <!-- Items -->
+  <section class="main items">
+    <article class="item">
+      <header>
+        <a href="#"
+          ><img
+            src="{% static 'core/images/pic01_1.jpg' %}"
+            alt=""
+            width="800"
+            height="400"
+        /></a>
+        <h3>Beginner Yoga Series</h3>
+      </header>
+      <p>
+        Start your yoga journey with our beginner series. Learn the basics of
+        yoga postures, breathing techniques, and mindfulness meditation.
+      </p>
+      <ul class="actions">
+        <li><a href="#" class="button">Learn More</a></li>
+      </ul>
+    </article>
+    <article class="item">
+      <header>
+        <a href="#"
+          ><img
+            src="{% static 'core/images/pic02_1.jpg' %}"
+            alt=""
+            width="800"
+            height="400"
+        /></a>
+        <h3>Yoga for Flexibility</h3>
+      </header>
+      <p>
+        Enhance your flexibility and range of motion with targeted yoga
+        sequences. Perfect for all levels looking to deepen their practice.
+      </p>
+      <ul class="actions">
+        <li><a href="#" class="button">Discover How</a></li>
+      </ul>
+    </article>
+    <article class="item">
+      <header>
+        <a href="#"
+          ><img
+            src="{% static 'core/images/pic03_1.jpg' %}"
+            alt=""
+            width="800"
+            height="400"
+        /></a>
+        <h3>Mindfulness & Meditation</h3>
+      </header>
+      <p>
+        Explore mindfulness and meditation classes to reduce stress, improve
+        mental clarity, and achieve a state of peace and well-being.
+      </p>
+      <ul class="actions">
+        <li><a href="#" class="button">Find Peace</a></li>
+      </ul>
+    </article>
+    <article class="item">
+      <header>
+        <a href="#"
+          ><img
+            src="{% static 'core/images/pic04_1.jpg' %}"
+            alt=""
+            width="800"
+            height="400"
+        /></a>
+        <h3>Advanced Yoga Workshops</h3>
+      </header>
+      <p>
+        Deepen your practice with our advanced workshops focusing on specific
+        asanas, pranayama techniques, and yoga philosophy.
+      </p>
+      <ul class="actions">
+        <li><a href="#" class="button">Advance Your Practice</a></li>
+      </ul>
+    </article>
+  </section>
+  <!-- CTA -->
+  <section id="cta" class="main special">
+    <h2>Join Our Community</h2>
+    <p>
+      Be a part of our vibrant yoga community. Sign up today to start your
+      wellness journey and gain unlimited access to our yoga videos and
+      resources.
+    </p>
+    <ul class="actions">
+      <li><a href="#" class="button big">Get Started</a></li>
+    </ul>
+  </section>
+  <!-- Main --><!--
 					<section id="main" class="main">
 						<header>
 							<h2>Lorem ipsum dolor</h2>
@@ -137,45 +121,35 @@ Yoga & Wellness{% endblock %} {% block content %} {% comment %} <!DOCTYPE html>
 						<p> placeholder for additional section.</p>
 					</section>
 				--><!-- Footer -->
-      <footer id="footer">
-        <ul class="icons">
-          <li>
-            <a href="#" class="icon fa-twitter"
-              ><span class="label">Twitter</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon fa-facebook"
-              ><span class="label">Facebook</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon fa-instagram"
-              ><span class="label">Instagram</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon fa-linkedin"
-              ><span class="label">LinkedIn</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon fa-envelope"
-              ><span class="label">Email</span></a
-            >
-          </li>
-        </ul>
-      </footer>
-    </div>
+  <footer id="footer">
+    <ul class="icons">
+      <li>
+        <a href="#" class="icon fa-twitter"
+          ><span class="label">Twitter</span></a
+        >
+      </li>
+      <li>
+        <a href="#" class="icon fa-facebook"
+          ><span class="label">Facebook</span></a
+        >
+      </li>
+      <li>
+        <a href="#" class="icon fa-instagram"
+          ><span class="label">Instagram</span></a
+        >
+      </li>
+      <li>
+        <a href="#" class="icon fa-linkedin"
+          ><span class="label">LinkedIn</span></a
+        >
+      </li>
+      <li>
+        <a href="#" class="icon fa-envelope"
+          ><span class="label">Email</span></a
+        >
+      </li>
+    </ul>
+  </footer>
+</div>
 
-    {% endblock %} {% comment %}
-    <!-- Scripts -->
-    <script src="{% static 'shared/js/jquery.min.js' %}"></script>
-    <script src="{% static 'shared/js/skel.min.js' %}"></script>
-    <script src="{% static 'shared/js/util.js' %}"></script>
-    <script src="{% static 'shared/js/main.js' %}"></script>
-    {% endcomment %} {% comment %}
-  </body>
-  {% endcomment %} {% comment %}
-</html>
-{% endcomment %}
+{% endblock %}
