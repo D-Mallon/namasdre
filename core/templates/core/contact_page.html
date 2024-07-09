@@ -1,4 +1,63 @@
 {% extends "shared/base.html" %} {% load static %} {% block title %}Namasdre -
 Yoga & Wellness Contact{% endblock %} {% block content %}
-<h1>Welcome to the contact page</h1>
+<div class="contact-container">
+  <h1>Contact Us</h1>
+  <p>Feel free to reach out to us for any inquiries or to book a session.</p>
+  <div class="contact-info">
+    <h2>Our Address</h2>
+    <p>123 Yoga Street, Wellness City, YG 4567</p>
+
+    <h2>Phone Number</h2>
+    <p><a href="tel:+1234567890">+123 456 7890</a></p>
+
+    <h2>Email</h2>
+    <p><a href="mailto:info@namasdre.com">info@namasdre.com</a></p>
+
+    <h2>Follow Us</h2>
+    <ul class="social-icons">
+      <li>
+        <a href="https://twitter.com/yourprofile" class="icon fa-twitter"
+          ><span class="label">Twitter</span></a
+        >
+      </li>
+      <li>
+        <a href="https://facebook.com/yourprofile" class="icon fa-facebook"
+          ><span class="label">Facebook</span></a
+        >
+      </li>
+      <li>
+        <a href="https://instagram.com/yourprofile" class="icon fa-instagram"
+          ><span class="label">Instagram</span></a
+        >
+      </li>
+      <li>
+        <a href="https://linkedin.com/yourprofile" class="icon fa-linkedin"
+          ><span class="label">LinkedIn</span></a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <div class="contact-form">
+    <h2>Send Us a Message</h2>
+    <form method="post" action="{% url 'contact' %}">
+      {% csrf_token %}
+      <div class="field">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="field">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="field">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <div class="actions">
+        <button type="submit" class="button">Send Message</button>
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}
