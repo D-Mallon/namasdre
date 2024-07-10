@@ -1775,7 +1775,7 @@ body.is-loading #header.alt .inner {
 .contact-container {
   padding: 2em;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 5% auto;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -1800,6 +1800,11 @@ body.is-loading #header.alt .inner {
 .contact-info a {
   text-decoration: none;
   border-bottom: 1px dotted;
+}
+
+.contact_paragraphs {
+  margin: 0 0 2em 0;
+  text-align: center;
 }
 
 .contact-form {
