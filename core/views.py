@@ -20,8 +20,13 @@ def timetable(request):
     start_month = today.replace(day=1)
     end_month = (start_month + datetime.timedelta(days=32)).replace(day=1)
     
-    online_classes = YogaClass.objects.filter(class_type='online', start_time__gte=start_month, start_time__lt=end_month)
-    in_person_classes = YogaClass.objects.filter(class_type='in_person', start_time__gte=start_month, start_time__lt=end_month)
+    online_classes = YogaClass.objects.filter(class_type='online', start_time__gte=start_month, start_time__lt=end_month).order_by('start_time')
+    in_person_classes = YogaClass.objects.filter(class_type='in_person', start_time__gte=start_month, start_time__lt=end_month).order_by('start_time')
+    
+        # Debugging lines
+    print("Online Classes:", online_classes)
+    print("In Person Classes:", in_person_classes)
+
 
     context = {
         'online_classes': online_classes,

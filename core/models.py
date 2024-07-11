@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from django.utils import timezone
 
 class YogaClass(models.Model):
     CLASS_TYPE_CHOICES = [
@@ -13,6 +12,13 @@ class YogaClass(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     location = models.CharField(max_length=255, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not timezone.is_aware(self.start_time):
+            self.start_time = timezone.make_aware(self.start_time)
+        if not timezone.is_aware(self.end_time):
+            self.end_time = timezone.make_aware(self.end_time)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.title} ({self.get_class_type_display()})"

@@ -1,0 +1,3 @@
+# Prettier was causing issues with some of the tags and spacing them unneccessarily and erroneously automatically so disabling it with Django templates and HTML files
+
+*.html
