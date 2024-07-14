@@ -1866,3 +1866,40 @@ body.is-loading #header.alt .inner {
 .social-icons a:hover {
   color: #ef6480;
 }
+
+/* Timetable page specific styling */
+.timetable-container {
+  align-content: center;
+  align-items: center;
+  padding: 2em;
+  max-width: 800px;
+  margin: 5% auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.timetable-container h1,
+.timetable-container h2 {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.class-list {
+  margin-bottom: 2em;
+}
+
+.class-item {
+  padding: 1em;
+  border-bottom: 1px solid #ddd;
+}
+
+.class-item:last-child {
+  border-bottom: none;
+}
+
+.class-item p {
+  margin: 0;
+  font-size: 1.1em;
+  color: #666;
+}

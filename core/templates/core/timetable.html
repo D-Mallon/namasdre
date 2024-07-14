@@ -1,16 +1,19 @@
-{% extends "shared/base.html" %}
-{% load static %}
-{% block title %}Namasdre - Yoga & Wellness Timetable{% endblock %}
-
-{% block content %}
-<div class="timetable-container">
+{% extends "shared/base.html" %} {% load static %} {% block title %}Namasdre -
+Yoga & Wellness Contact{% endblock %} {% block content %}
+<header id="header" class="alt">
+  <div class="inner">
+    <h1>Namasdre</h1>
+    <p>Enhancing Your Mind-Body Connection Through Yoga</p>
+  </div>
+</header>
+<div class="timetable-container custom-timetable">
   <h1>Class Timetable</h1>
 
   <h2>Online Classes</h2>
   <div class="class-list">
     {% if online_classes %}
       {% for class in online_classes %}
-        <div class="class">
+        <div class="class-item">
           <p>
             {{ class.start_time|date:"D, M d" }}: {{ class.title }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
           </p>
@@ -25,7 +28,7 @@
   <div class="class-list">
     {% if in_person_classes %}
       {% for class in in_person_classes %}
-        <div class="class">
+        <div class="class-item">
           <p>
             {{ class.start_time|date:"D, M d" }}: {{ class.title }} at {{ class.location }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
           </p>
