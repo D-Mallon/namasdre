@@ -1878,8 +1878,13 @@ body.is-loading #header.alt .inner {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .classTimetableH1 {
   border-bottom: 1px solid #ddd;
+}
+
+.classType {
+  border-bottom: 5px solid #ddd;
 }
 
 .timetable-container h1,
