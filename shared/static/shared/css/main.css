@@ -1878,6 +1878,9 @@ body.is-loading #header.alt .inner {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.classTimetableH1 {
+  border-bottom: 1px solid #ddd;
+}
 
 .timetable-container h1,
 .timetable-container h2 {
@@ -1887,6 +1890,7 @@ body.is-loading #header.alt .inner {
 
 .class-list {
   margin-bottom: 2em;
+  text-align: center;
 }
 
 .class-item {
