@@ -8,7 +8,7 @@ document
     } else {
       menu.style.right = "0px";
     }
-    event.stopPropagation(); // Prevent click from immediately propagating to document
+    event.stopPropagation(); // Prevents the click event from propagating (bubbling up) to other elements. This is useful to prevent the document click handler from immediately closing the menu.
   });
 
 document.addEventListener("click", function (event) {
