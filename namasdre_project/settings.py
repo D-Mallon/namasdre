@@ -130,6 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
+# https://stackoverflow.com/questions/29311354/how-to-set-the-timezone-in-django
 # TIME_ZONE = "Europe/London"
 TIME_ZONE = "UTC"
 
