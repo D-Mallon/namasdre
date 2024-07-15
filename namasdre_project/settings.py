@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     "shared",
+    "register.apps.RegisterConfig",
+    "crispy_forms",
+    "bootstrap4",
+    "crispy_bootstrap4"
 ]
 
 MIDDLEWARE = [
@@ -73,6 +77,9 @@ TEMPLATES = [
         },
     },
 ]
+
+# DM adding crispy forms below per https://www.techwithtim.net/tutorials/django/user-registration instructions. The reason for using this is to speed up production time.
+CRISPY_TEMPLATE_PACK="bootstrap4"
 
 WSGI_APPLICATION = "namasdre_project.wsgi.application"
 
