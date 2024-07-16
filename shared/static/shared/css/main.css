@@ -1990,3 +1990,19 @@ html {
   justify-content: center;
   height: 100%;
 }
+
+/* Additional styling for the medical conditions input */
+.medical-conditions-input {
+  width: 100%;
+  height: 6em; /* Adjust as needed for the desired height */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+/* Add space above the medical conditions label */
+.medical-conditions-input-label {
+  margin-top: 1em; /* Adjust the value to increase/decrease space */
+  display: block;
+}
