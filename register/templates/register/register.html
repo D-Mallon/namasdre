@@ -8,16 +8,21 @@
     <h2>Register</h2>
     <form method="POST" class="form-group">
         {% csrf_token %}
-        {{ form.non_field_errors }}
+        {{ form.non_field_errors }} 
+        {% comment %} This renders any non-field-specific errors at the top of the form, such as errors that apply to the entire form rather than a specific field. {% endcomment %}
         {{ form.username|as_crispy_field }}
         {{ form.email|as_crispy_field }}
         {{ form.password1|as_crispy_field }}
         {{ form.password2|as_crispy_field }}
+        {% comment %} These lines render each form field using crispy_forms to apply the appropriate styling. The as_crispy_field filter makes sure the fields are styled according to the settings defined in the crispy_forms configuration (e.g., using Bootstrap 4 classes). {% endcomment %}
         <div class="form-group">
             <label for="{{ form.medical_conditions.id_for_label }}" class="medical-conditions-input-label">
+                {% comment %} This sets the label for the medical_conditions field with the custom class medical-conditions-input-label. {% endcomment %}
                 {{ form.medical_conditions.label }}
+                {% comment %} This renders the label text for the medical_conditions field. {% endcomment %}
             </label>
             {{ form.medical_conditions|as_crispy_field }}
+            {% comment %} This renders the medical_conditions field using crispy_forms, ensuring it is styled correctly. {% endcomment %}
         </div>
         <button type="submit" class="btn btn-success">Register</button>
     </form>
@@ -26,4 +31,15 @@
 
 {% comment %}
 setup for registration taken from https://www.techwithtim.net/tutorials/django/user-registration
+{% endcomment %}
+
+{% comment %} 
+
+**** Summary ****
+
+CSRF Token: Ensures the form submission is secure.
+Non-field Errors: Renders any form-wide errors.
+Crispy Forms: Renders each form field with crispy_forms styling.
+Custom Label and Field for medical_conditions: Adds a custom class to the label for the medical_conditions field and renders the field with crispy_forms. 
+
 {% endcomment %}
