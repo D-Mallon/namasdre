@@ -1,0 +1,44 @@
+{% extends "shared/base.html" %} {% load static %} {% block title %}Namasdre -
+Yoga & Wellness Contact{% endblock %} {% block content %}
+<header id="header" class="alt">
+  <div class="inner">
+    <h1>Namasdre</h1>
+    <p>Enhancing Your Mind-Body Connection Through Yoga</p>
+  </div>
+</header>
+<div class="timetable-container custom-timetable">
+  <h1 class ="classTimetableH1">Booking Portal</h1>
+
+  <h2 class="classType">Online Classes</h2>
+  <div class="class-list">
+    {% if online_classes %}
+      {% for class in online_classes %}
+        <div class="class-item">
+          <p>
+            {{ class.start_time|date:"D, M d" }}: {{ class.title }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
+          </p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No upcoming online classes</p>
+    {% endif %}
+  </div>
+
+  <h2 class="classType">In Person Classes</h2>
+  <div class="class-list">
+    {% if in_person_classes %}
+      {% for class in in_person_classes %}
+        <div class="class-item">
+          <p>
+            {{ class.start_time|date:"D, M d" }}: {{ class.title }} at {{ class.location }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
+          </p>
+          <p>Location: {{ class.location }}</p>
+          <p>Time: {{ class.end_time|time:"g:i A" }}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No upcoming in-person classes</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

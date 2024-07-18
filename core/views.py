@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from .models import YogaClass
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
 import datetime
 
 # Create your views here.
@@ -54,3 +56,11 @@ def contact(request):
         return HttpResponse('Thank you for your message.')
 
     return render(request, 'core/contact_page.html')
+
+
+@login_required
+def booking_portal(request):
+    if request.user.is_authenticated:
+        return render(request, 'core/booking_portal.html')
+    else: 
+        return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'})
