@@ -17,16 +17,16 @@ def register(request):
     return render(request, "register/register.html", {"form": form})
 
 def custom_login(request):
+    next_url = request.GET.get('next', '/')
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            next_url = request.POST.get('next', '/')
-            return HttpResponseRedirect(next_url)
+            return HttpResponseRedirect(request.POST.get('next', '/'))
     else:
         form = AuthenticationForm()
-    return render(request, "register/registrations/login.html", {"form": form})
+    return render(request, "registration/login.html", {"form": form, "next": next_url})
 
 def custom_logout(request):
     next_url = request.GET.get('next', '/')

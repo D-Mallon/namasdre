@@ -6,6 +6,21 @@
 {% block content %}
 <div class="login-container">
     <h2>LOGIN</h2>
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.username|as_crispy_field }}
+        {{ form.password|as_crispy_field }}
+        <input type="hidden" name="next" value="{{ next }}">
+        <p>Don't have an account? Create one <a href="/register">here</a></p>
+        <button type="submit" class="btn btn-success">Login</button>
+    </form>
+</div>
+{% endblock %}
+
+{% comment %} {% block content %}
+<div class="login-container">
+    <h2>LOGIN</h2>
      <form method="post" class="from-group">
 	{% csrf_token %}
 	{{form|crispy}}
@@ -13,4 +28,4 @@
 	<button type="submit" class="btn btn-success">Login</button>	
     </form>
 </div>
-{% endblock %}
+{% endblock %} {% endcomment %}

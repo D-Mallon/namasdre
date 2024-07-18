@@ -63,4 +63,5 @@ def booking_portal(request):
     if request.user.is_authenticated:
         return render(request, 'core/booking_portal.html')
     else: 
+        print('You must be logged in to access this page.')
         return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'})
