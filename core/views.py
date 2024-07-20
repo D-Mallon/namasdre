@@ -35,21 +35,19 @@ def home(request):
 
 def timetable(request):
     now = timezone.now()
-    
     # Get classes for today
     today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    today_end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+    # use below if trying to bookend filter with start and end of current day. Preference is to show all future classes though.
+    # today_end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
     online_classes = YogaClass.objects.filter(
         class_type='online',
-        start_time__gte=today_start,
-        start_time__lte=today_end
+        start_time__gte=today_start
     ).order_by('start_time')
 
     in_person_classes = YogaClass.objects.filter(
         class_type='in_person',
-        start_time__gte=today_start,
-        start_time__lte=today_end
+        start_time__gte=today_start
     ).order_by('start_time')
 
     # Debugging lines to print the context

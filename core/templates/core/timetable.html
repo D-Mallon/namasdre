@@ -15,14 +15,21 @@
   <div class="class-list">
     {% if online_classes %}
       {% for class in online_classes %}
-        <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
-          <p>
-            {{ class.start_time|date:"D, M d" }}: {{ class.title }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
-          </p>
-          {% if class.start_time < now %}
-            <p class="finished-message">This class has already started</p>
-          {% endif %}
-        </div>
+      <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
+        <p class="class-datetime">
+          {{ class.start_time|date:"l, F d" }}<br>
+          {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
+        </p>
+        <p class="class-title">
+          {{ class.title }}
+        </p>
+        <p class="class-location">
+          {{ class.location }}
+        </p>
+        {% if class.start_time < now %}
+          <p id="finished-message">This class has already started / finished.</p>
+        {% endif %}
+      </div>
       {% endfor %}
     {% else %}
       <p>No upcoming online classes</p>
@@ -33,14 +40,21 @@
   <div class="class-list">
     {% if in_person_classes %}
       {% for class in in_person_classes %}
-        <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
-          <p>
-            {{ class.start_time|date:"D, M d" }}: {{ class.title }} at {{ class.location }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
-          </p>
-          {% if class.start_time < now %}
-            <p class="finished-message">This class has already started</p>
-          {% endif %}
-        </div>
+      <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
+        <p class="class-datetime">
+          {{ class.start_time|date:"l, F d" }}<br>
+          {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
+        </p>
+        <p class="class-title"><b>
+          {{ class.title }}</b>
+        </p>
+        <p class="class-location">
+          {{ class.location }}
+        </p>
+        {% if class.start_time < now %}
+          <p id="finished-message">This class has already started / finished.</p>
+        {% endif %}
+      </div>
       {% endfor %}
     {% else %}
       <p>No upcoming in-person classes</p>
@@ -48,3 +62,7 @@
   </div>
 </div>
 {% endblock %}
+
+{% comment %} <p>
+  {{ class.start_time|date:"D, M d" }}: {{ class.title }} at {{ class.location }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
+</p> {% endcomment %}

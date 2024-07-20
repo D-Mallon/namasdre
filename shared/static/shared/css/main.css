@@ -1910,8 +1910,8 @@ body.is-loading #header.alt .inner {
   color: #888;
 }
 
-.finished-message {
-  color: #ff0000;
+#finished-message {
+  color: #000000;
   font-weight: bold;
 }
 
