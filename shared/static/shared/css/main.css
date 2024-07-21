@@ -1514,8 +1514,17 @@ table.alt tbody tr td {
   letter-spacing: 0.325rem;
   font-weight: 400;
   font-size: 0.8em;
+  /* font-size: 1.8em; */
   padding: 0 1.25em;
 }
+
+/* adding below addition for titles of each screen to increase text size */
+
+#header.alt #page-title {
+  font-size: 2em;
+}
+
+/* end of changes */
 
 #header.alt .inner {
   -moz-transition: opacity 2s ease;
