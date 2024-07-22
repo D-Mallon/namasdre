@@ -22,3 +22,11 @@ class YogaClass(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.get_class_type_display()})"
+
+class YogaClassBooking(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    yoga_class = models.ForeignKey(YogaClass, on_delete=models.CASCADE)
+    booking_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} booked {self.yoga_class.title} at {self.booking_time}"

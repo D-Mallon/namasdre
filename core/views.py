@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from .models import YogaClass
+from .models import YogaClass, YogaClassBooking
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.utils import timezone
 import datetime
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 
@@ -116,6 +117,14 @@ def booking_portal(request):
         print('You must be logged in to access this page.')
         return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'})
   
+@login_required
+def add_class_to_profile(request, class_id):
+    yoga_class = get_object_or_404(YogaClass, id=class_id)
+    YogaClassBooking.objects.create(user=request.user, yoga_class=yoga_class)
+    return redirect('profile')
+
 @login_required  
 def profile(request):
-    return render(request, 'core/profile.html')
+    booked_classes = YogaClassBooking.objects.filter(user=request.user).order_by('yoga_class__start_time')
+    return render(request, 'core/profile.html', {'booked_classes': booked_classes})
+        

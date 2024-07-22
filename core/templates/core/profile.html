@@ -1,5 +1,7 @@
-{% extends "shared/base.html" %} {% load static %} {% block title %}Namasdre -
-Yoga & Wellness Profile{% endblock %} {% block content %}
+{% extends "shared/base.html" %}
+{% load static %}
+{% block title %}Namasdre - Your Profile{% endblock %}
+{% block content %}
 <header id="header" class="alt">
   <div class="inner">
     <h1>Namasdre</h1>
@@ -7,25 +9,24 @@ Yoga & Wellness Profile{% endblock %} {% block content %}
   </div>
 </header>
 <div class="timetable-container custom-timetable">
-  {% comment %} <h1 class ="classTimetableH1">Booking Portal</h1> {% endcomment %}
+  <h2>Namaste {{ user.first_name }}</h2>
 
-  {% comment %} <h2 class="classType">Online Classes</h2>
+  <h2 class="classType">Your Booked Classes</h2>
   <div class="class-list">
-    {% if online_classes %}
-      {% for class in online_classes %}
-        <div class="class-item">
-          <p>
-            {{ class.start_time|date:"D, M d" }}: {{ class.title }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
-          </p>
-        </div>
+    {% if booked_classes %}
+      {% for booking in booked_classes %}
+      <div class="class-item">
+        <p class="class-datetime">
+          {{ booking.yoga_class.start_time|date:"l, F d" }}<br>
+          {{ booking.yoga_class.start_time|time:"g:i A" }} – {{ booking.yoga_class.end_time|time:"g:i A" }}
+        </p>
+        <p class="class-title">{{ booking.yoga_class.title }}</p>
+        <p class="class-location">{{ booking.yoga_class.location }}</p>
+      </div>
       {% endfor %}
     {% else %}
-      <p>No upcoming online classes</p>
+      <p>You have not booked any classes yet.</p>
     {% endif %}
   </div>
-
-</div>{% endcomment %}
-
-<h2>Namaste {{ user.first_name }}</h2>
 </div>
 {% endblock %}

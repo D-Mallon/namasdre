@@ -1,5 +1,7 @@
-{% extends "shared/base.html" %} {% load static %} {% block title %}Namasdre -
-Yoga & Wellness Contact{% endblock %} {% block content %}
+{% extends "shared/base.html" %}
+{% load static %}
+{% block title %}Namasdre - Booking Portal{% endblock %}
+{% block content %}
 <header id="header" class="alt">
   <div class="inner">
     <h1>Namasdre</h1>
@@ -7,8 +9,6 @@ Yoga & Wellness Contact{% endblock %} {% block content %}
   </div>
 </header>
 <div class="timetable-container custom-timetable">
-  {% comment %} <h1 class="classTimetableH1">Class Timetable</h1> {% endcomment %}
-
   <h2 class="classType">Online Classes</h2>
   <div class="class-list">
     {% if online_classes %}
@@ -18,16 +18,11 @@ Yoga & Wellness Contact{% endblock %} {% block content %}
           {{ class.start_time|date:"l, F d" }}<br>
           {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
         </p>
-        <p class="class-title">
-          {{ class.title }}
-        </p>
-        <p class="class-location">
-          {{ class.location }}
-        </p>
-        {% comment %} ***NO NEED FOR THIS IF WE'RE ONLY SHOWING THE UPCOMING CLASSES***
-        {% if class.start_time < now %}
-          <p id="finished-message">This class has already started / finished.</p>
-        {% endif %} {% endcomment %}
+        <p class="class-title">{{ class.title }}</p>
+        <p class="class-location">{{ class.location }}</p>
+        <div class="actions">
+          <a href="{% url 'add_class_to_profile' class.id %}" class="button big">Register for class</a>
+        </div>
       </div>
       {% endfor %}
     {% else %}
@@ -44,16 +39,11 @@ Yoga & Wellness Contact{% endblock %} {% block content %}
           {{ class.start_time|date:"l, F d" }}<br>
           {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
         </p>
-        <p class="class-title"><b>
-          {{ class.title }}</b>
-        </p>
-        <p class="class-location">
-          {{ class.location }}
-        </p>
-        {% comment %} ***NO NEED FOR THIS IF WE'RE ONLY SHOWING THE UPCOMING CLASSES***
-        {% if class.start_time < now %}
-          <p id="finished-message">This class has already started / finished.</p>
-        {% endif %} {% endcomment %}
+        <p class="class-title"><b>{{ class.title }}</b></p>
+        <p class="class-location">{{ class.location }}</p>
+        <div class="actions">
+          <a href="{% url 'add_class_to_profile' class.id %}" class="button big">Register for class</a>
+        </div>
       </div>
       {% endfor %}
     {% else %}
