@@ -29,8 +29,12 @@ def custom_login(request):
     return render(request, "registration/login.html", {"form": form, "next": next_url})
 
 def custom_logout(request):
-    next_url = request.GET.get('next', '/')
-    if '/bookingportal/' in next_url:
-        next_url = '/'
     logout(request)
-    return HttpResponseRedirect(next_url)
+    return redirect("home")
+
+# def custom_logout(request):
+#     next_url = request.GET.get('next', '/')
+#     if '/bookingportal/' in next_url:
+#         next_url = '/'
+#     logout(request)
+#     return HttpResponseRedirect(next_url)

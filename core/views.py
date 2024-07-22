@@ -93,3 +93,7 @@ def booking_portal(request):
     else: 
         print('You must be logged in to access this page.')
         return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'})
+  
+@login_required  
+def profile(request):
+    return render(request, 'core/profile.html')
