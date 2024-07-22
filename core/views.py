@@ -89,7 +89,29 @@ def contact(request):
 @login_required
 def booking_portal(request):
     if request.user.is_authenticated:
-        return render(request, 'core/booking_portal.html')
+        now = timezone.now()
+        # Removing prior classes from the booking portal so that only future classes are shown
+        # today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        # use below if trying to bookend filter with start and end of current day. Preference is to show all future classes though.
+        # today_end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+
+        online_classes = YogaClass.objects.filter(
+            class_type='online',
+            start_time__gte=now
+        ).order_by('start_time')
+
+        in_person_classes = YogaClass.objects.filter(
+            class_type='in_person',
+            start_time__gte=now
+        ).order_by('start_time')
+
+        context = {
+            'online_classes': online_classes,
+            'in_person_classes': in_person_classes,
+            'now': now,
+        }
+        return render(request, 'core/booking_portal.html', context)
+        # return render(request, 'core/booking_portal.html')
     else: 
         print('You must be logged in to access this page.')
         return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'})
