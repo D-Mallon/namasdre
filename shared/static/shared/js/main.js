@@ -46,4 +46,40 @@
       $img.remove();
     });
   });
+
+  // Function to book class and handle response
+  window.bookClass = function (classId) {
+    const csrftoken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+    fetch("/add_class_to_profile/" + classId + "/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        showPopupMessage(data.message);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  // Function to show popup message
+  function showPopupMessage(message) {
+    const popup = document.getElementById("popup-message");
+    popup.innerText = message;
+    popup.classList.add("show");
+    setTimeout(function () {
+      popup.classList.remove("show");
+    }, 3000);
+
+    document.addEventListener("click", function () {
+      popup.classList.remove("show");
+    });
+  }
 })(jQuery);

@@ -1,38 +1,18 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import YogaClass, YogaClassBooking
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.utils import timezone
 import datetime
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 
 # Create your views here.
 
 def home(request):
     return render(request, 'core/index.html')
-
-# def timetable(request):
-#     today = datetime.date.today()
-#     start_month = today.replace(day=1)
-#     end_month = (start_month + datetime.timedelta(days=32)).replace(day=1)
-    
-#     online_classes = YogaClass.objects.filter(class_type='online', start_time__gte=start_month, start_time__lt=end_month).order_by('start_time')
-#     in_person_classes = YogaClass.objects.filter(class_type='in_person', start_time__gte=start_month, start_time__lt=end_month).order_by('start_time')
-    
-#         # Debugging lines
-#     print("Online Classes:", online_classes)
-#     print("In Person Classes:", in_person_classes)
-
-
-#     context = {
-#         'online_classes': online_classes,
-#         'in_person_classes': in_person_classes,
-#         'today': today,
-#     }
-#     return render(request, 'core/timetable.html', context)
-
 
 def timetable(request):
     now = timezone.now()
@@ -64,8 +44,6 @@ def timetable(request):
         'now': now,
     }
     return render(request, 'core/timetable.html', context)
-
-
 
 def contact(request):
     if request.method == 'POST':
@@ -116,15 +94,30 @@ def booking_portal(request):
     else: 
         print('You must be logged in to access this page.')
         return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'})
-  
+
 @login_required
 def add_class_to_profile(request, class_id):
     yoga_class = get_object_or_404(YogaClass, id=class_id)
+    if YogaClassBooking.objects.filter(user=request.user, yoga_class=yoga_class).exists():
+        return JsonResponse({'message': 'You have already booked this class.'})
     YogaClassBooking.objects.create(user=request.user, yoga_class=yoga_class)
-    return redirect('profile')
+    return JsonResponse({'message': 'Class added to your profile!'})
+
+
+# @login_required
+# def add_class_to_profile(request, class_id):
+#     yoga_class = get_object_or_404(YogaClass, id=class_id)
+#     if YogaClassBooking.objects.filter(user=request.user, yoga_class=yoga_class).exists():
+#         alert = 'You have already booked this class.'
+#         return redirect('profile')
+#     YogaClassBooking.objects.create(user=request.user, yoga_class=yoga_class)
+#     return redirect('profile')
+
+def isClassBooked(user, yoga_class):
+    return YogaClassBooking.objects.filter(user=user, yoga_class=yoga_class).exists()
 
 @login_required  
 def profile(request):
     booked_classes = YogaClassBooking.objects.filter(user=request.user).order_by('yoga_class__start_time')
     return render(request, 'core/profile.html', {'booked_classes': booked_classes})
-        
+
