@@ -27,10 +27,11 @@ class YogaClassForm(forms.ModelForm):
             end_time = timezone.make_aware(end_time)
         return end_time
 
+# this is what's going to be shown on the admin page
 @admin.register(YogaClass)
 class YogaClassAdmin(admin.ModelAdmin):
     form = YogaClassForm
-    list_display = ('title', 'class_type', 'start_time', 'end_time', 'location')
-    list_filter = ('class_type',)
+    list_display = ('id', 'title', 'class_type', 'start_time', 'end_time', 'location')
+    list_filter = ('class_type','class_type')
     search_fields = ('title', 'location')
 
