@@ -47,11 +47,25 @@
     });
   });
 
+  // Function to get CSRF token
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
   // Function to book class and handle response
   window.bookClass = function (classId) {
-    const csrftoken = document.querySelector(
-      "[name=csrfmiddlewaretoken]"
-    ).value;
+    const csrftoken = getCookie("csrftoken");
     fetch("/add_class_to_profile/" + classId + "/", {
       method: "POST",
       headers: {
@@ -72,14 +86,41 @@
   // Function to show popup message
   function showPopupMessage(message) {
     const popup = document.getElementById("popup-message");
-    popup.innerText = message;
-    popup.classList.add("show");
-    setTimeout(function () {
-      popup.classList.remove("show");
-    }, 3000);
+    if (popup) {
+      popup.innerText = message;
+      popup.classList.add("show");
+      setTimeout(function () {
+        popup.classList.remove("show");
+      }, 3000);
 
-    document.addEventListener("click", function () {
-      popup.classList.remove("show");
-    });
+      document.addEventListener("click", function () {
+        popup.classList.remove("show");
+      });
+    }
   }
+
+  // Add the cancelBooking function
+  window.cancelBooking = function (bookingId) {
+    const csrftoken = getCookie("csrftoken");
+    fetch(`/remove_class_from_profile/${bookingId}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          const classItem = document.getElementById(`class-item-${bookingId}`);
+          if (classItem) {
+            classItem.remove();
+            showPopupMessage(data.message);
+          }
+        } else {
+          showPopupMessage("Failed to remove the booking.");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  };
 })(jQuery);

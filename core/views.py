@@ -103,18 +103,29 @@ def add_class_to_profile(request, class_id):
     YogaClassBooking.objects.create(user=request.user, yoga_class=yoga_class)
     return JsonResponse({'message': 'Class added to your profile!'})
 
-
 # @login_required
-# def add_class_to_profile(request, class_id):
+# def remove_class_from_profile(request, class_id):
 #     yoga_class = get_object_or_404(YogaClass, id=class_id)
-#     if YogaClassBooking.objects.filter(user=request.user, yoga_class=yoga_class).exists():
-#         alert = 'You have already booked this class.'
-#         return redirect('profile')
-#     YogaClassBooking.objects.create(user=request.user, yoga_class=yoga_class)
-#     return redirect('profile')
+#     booking = YogaClassBooking.objects.filter(user=request.user, yoga_class=yoga_class).first()
+#     if booking:
+#         booking.delete()
+#         return JsonResponse({'success': True, 'message': 'Class removed from your profile.'})
+#     return JsonResponse({'success': False, 'message': 'Class not found in your profile.'})
 
-def isClassBooked(user, yoga_class):
-    return YogaClassBooking.objects.filter(user=user, yoga_class=yoga_class).exists()
+@login_required
+def remove_class_from_profile(request, class_id):
+    if request.method == "POST":
+        try:
+            booking = get_object_or_404(YogaClassBooking, id=class_id, user=request.user)
+            booking.delete()
+            return JsonResponse({"success": True, "message": "Booking cancelled successfully."})
+        except Exception as e:
+            return JsonResponse({"success": False, "message": str(e)})
+    return JsonResponse({"success": False, "message": "Invalid request method."})
+
+
+
+
 
 @login_required  
 def profile(request):
