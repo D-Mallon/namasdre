@@ -103,15 +103,6 @@ def add_class_to_profile(request, class_id):
     YogaClassBooking.objects.create(user=request.user, yoga_class=yoga_class)
     return JsonResponse({'message': 'Class added to your profile!'})
 
-# @login_required
-# def remove_class_from_profile(request, class_id):
-#     yoga_class = get_object_or_404(YogaClass, id=class_id)
-#     booking = YogaClassBooking.objects.filter(user=request.user, yoga_class=yoga_class).first()
-#     if booking:
-#         booking.delete()
-#         return JsonResponse({'success': True, 'message': 'Class removed from your profile.'})
-#     return JsonResponse({'success': False, 'message': 'Class not found in your profile.'})
-
 @login_required
 def remove_class_from_profile(request, class_id):
     if request.method == "POST":

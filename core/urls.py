@@ -11,6 +11,7 @@ urlpatterns = [
     path('remove_class_from_profile/<int:class_id>/', remove_class_from_profile, name='remove_class_from_profile'),
     path('accounts/', include("django.contrib.auth.urls")),  # Ensure this path is correct
     path('profile', profile, name='profile'),
+    path("update_profile/", register_views.update_profile, name="update_profile"), 
     path('login/', register_views.custom_login, name='login'),
     path('logout/', register_views.custom_logout, name='logout'),
 ]
