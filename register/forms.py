@@ -18,6 +18,7 @@ class RegisterForm(UserCreationForm):
         fields = ["username", "first_name", "last_name", "email", "password1", "password2", "medical_conditions"]
 
 class ProfileUpdateForm(UserChangeForm):
+    user_name = User.username
     email = forms.EmailField(required=True)
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)

@@ -45,7 +45,7 @@ def custom_logout(request):
 @login_required  
 def profile(request):
     booked_classes = YogaClassBooking.objects.filter(user=request.user).order_by('yoga_class__start_time')
-    return render(request, 'core/profile.html', {'booked_classes': booked_classes})
+    return render(request, 'profile', {'booked_classes': booked_classes})
 
 @login_required
 def update_profile(request):
@@ -54,7 +54,7 @@ def update_profile(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important, to update the session with the new password
-            return redirect('core/profile')
+            return redirect('profile')
     else:
         form = ProfileUpdateForm(instance=request.user)
     return render(request, 'register/update_profile.html', {'form': form})
