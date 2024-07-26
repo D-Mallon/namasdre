@@ -35,9 +35,40 @@ class ProfileUpdateForm(UserChangeForm):
 
     def __init__(self, *args, **kwargs):
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['password'].widget = forms.HiddenInput()  # Hide the password field - prefer to use password change form below for styling reasons
+        if 'password' in self.fields:
+            del self.fields['password']  # Remove password field - prefer to use password change form below for styling reasons
 
 class CustomPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), required=False)
-    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), required=False)
-    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), required=False)
+    old_password = forms.CharField(
+        label="Old password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        required=False  # Make old password optional initially
+    )
+    new_password1 = forms.CharField(
+        label="New password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        required=False  # Make new password1 optional initially
+    )
+    new_password2 = forms.CharField(
+        label="Please repeat new password",
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        required=False  # Make new password2 optional initially
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        old_password = cleaned_data.get('old_password')
+        new_password1 = cleaned_data.get('new_password1')
+        new_password2 = cleaned_data.get('new_password2')
+
+        if old_password or new_password1 or new_password2:
+            if not old_password:
+                self.add_error('old_password', 'This field is required if you want to change your password.')
+            if not new_password1:
+                self.add_error('new_password1', 'This field is required if you want to change your password.')
+            if not new_password2:
+                self.add_error('new_password2', 'This field is required if you want to change your password.')
+            if new_password1 and new_password2 and new_password1 != new_password2:
+                self.add_error('new_password2', 'The two password fields didn’t match.')
+
+        return cleaned_data

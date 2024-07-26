@@ -52,12 +52,25 @@ def update_profile(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, instance=request.user)
         password_form = CustomPasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid() and password_form.is_valid():
+
+        if form.is_valid():
             form.save()
-            user = password_form.save()
-            update_session_auth_hash(request, user)  # Important, to update the session with the new password
+
+            # Check if the user is trying to change their password
+            old_password = request.POST.get('old_password')
+            new_password1 = request.POST.get('new_password1')
+            new_password2 = request.POST.get('new_password2')
+
+            if old_password or new_password1 or new_password2:
+                if password_form.is_valid():
+                    user = password_form.save()
+                    update_session_auth_hash(request, user)  # Important, to update the session with the new password
+                else:
+                    return render(request, 'register/update_profile.html', {'form': form, 'password_form': password_form})
+            
             return redirect('profile')
     else:
         form = ProfileUpdateForm(instance=request.user)
         password_form = CustomPasswordChangeForm(user=request.user)
+    
     return render(request, 'register/update_profile.html', {'form': form, 'password_form': password_form})
