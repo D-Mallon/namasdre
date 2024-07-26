@@ -10,9 +10,10 @@
 </header>
 <div class="timetable-container custom-timetable">
   <h2>Namaste {{ user.first_name }}</h2>
-  <div class="actions">
+  <p>Update your user information <a href="{% url 'update_profile' %}" style="color: blue;">here</a>.</p>
+  {% comment %} <div class="actions">
     <a href="{% url 'update_profile' %}" class="button big">Edit Profile</a>
-  </div>
+  </div> {% endcomment %}
   <h2 class="classType">Your Booked Classes</h2>
   <div class="class-list">
     {% if booked_classes %}

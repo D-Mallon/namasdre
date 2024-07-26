@@ -12,6 +12,8 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <h3>Change Password</h3>
+    {{ password_form.as_p }}
     <div class="actions">
       <button type="submit" class="button big">Save Changes</button>
     </div>

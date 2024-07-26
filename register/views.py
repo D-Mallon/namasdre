@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
-from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
 from core.models import YogaClassBooking
-from .forms import ProfileUpdateForm, RegisterForm
+from .forms import ProfileUpdateForm, RegisterForm, CustomPasswordChangeForm
 
 # Create your views here.
 def register(request):
@@ -51,10 +51,13 @@ def profile(request):
 def update_profile(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, instance=request.user)
-        if form.is_valid():
-            user = form.save()
+        password_form = CustomPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid() and password_form.is_valid():
+            form.save()
+            user = password_form.save()
             update_session_auth_hash(request, user)  # Important, to update the session with the new password
             return redirect('profile')
     else:
         form = ProfileUpdateForm(instance=request.user)
-    return render(request, 'register/update_profile.html', {'form': form})
+        password_form = CustomPasswordChangeForm(user=request.user)
+    return render(request, 'register/update_profile.html', {'form': form, 'password_form': password_form})
