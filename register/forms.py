@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from core.models import Profile
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -16,6 +17,13 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "first_name", "last_name", "email", "password1", "password2", "medical_conditions"]
+        
+    def save(self, commit=True):
+        user = super(RegisterForm, self).save(commit=False)
+        if commit:
+            user.save()
+            Profile.objects.create(user=user, medical_conditions=self.cleaned_data.get('medical_conditions'))
+        return user
 
 class ProfileUpdateForm(UserChangeForm):
     username = forms.CharField(max_length=150, required=True, widget=forms.TextInput(attrs={'readonly': 'readonly'}))
@@ -36,7 +44,21 @@ class ProfileUpdateForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
         if 'password' in self.fields:
-            del self.fields['password']  # Remove password field - prefer to use password change form below for styling reasons
+            del self.fields['password']  # Remove password field
+        try:
+            self.fields['medical_conditions'].initial = self.instance.profile.medical_conditions
+        except Profile.DoesNotExist:
+            self.fields['medical_conditions'].initial = ""
+
+    def save(self, commit=True):
+        user = super(ProfileUpdateForm, self).save(commit=False)
+        if commit:
+            user.save()
+            profile, created = Profile.objects.get_or_create(user=user)
+            profile.medical_conditions = self.cleaned_data.get('medical_conditions')
+            profile.save()
+        return user
+
 
 class CustomPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(

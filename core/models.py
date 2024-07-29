@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class YogaClass(models.Model):
     CLASS_TYPE_CHOICES = [
@@ -30,3 +31,10 @@ class YogaClassBooking(models.Model):
 
     def __str__(self):
         return f"{self.user.username} booked {self.yoga_class.title} at {self.booking_time}"
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    medical_conditions = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
