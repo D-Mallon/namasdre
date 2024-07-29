@@ -10,7 +10,8 @@
 </header>
 <div class="timetable-container custom-timetable">
   <h2>Namaste {{ user.first_name }}</h2>
-
+  <p>Medical Conditions: {{ user.profile.medical_conditions }}</p>
+  <p>Update your user information <a href="{% url 'update_profile' %}" style="color: blue;">here</a>.</p>
   <h2 class="classType">Your Booked Classes</h2>
   <div class="class-list">
     {% if booked_classes %}
@@ -34,6 +35,5 @@
     {% endif %}
   </div>
 </div>
-<div id="popup-message" class="popup-message"></div> <!-- Popup message element -->
+<div id="popup-message" class="popup-message"></div>
 {% endblock %}
-

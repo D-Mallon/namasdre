@@ -1,0 +1,22 @@
+{% extends "shared/base.html" %}
+{% load static %}
+{% block title %}Namasdre - Update Profile{% endblock %}
+{% block content %}
+<header id="header" class="alt">
+  <div class="inner">
+    <h1>Namasdre</h1>
+    <p id="page-title">Update Profile</p>
+  </div>
+</header>
+<div class="timetable-container custom-timetable">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h3>Change Password (optional)</h3>
+    {{ password_form.as_p }}
+    <div class="actions">
+      <button type="submit" class="button big">Save Changes</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
