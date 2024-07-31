@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django import forms
 from django.utils import timezone
-from .models import YogaClass
+from .models import YogaClass, Profile
 from django.contrib.admin.widgets import AdminSplitDateTime
 
 class YogaClassForm(forms.ModelForm):
@@ -32,6 +32,11 @@ class YogaClassForm(forms.ModelForm):
 class YogaClassAdmin(admin.ModelAdmin):
     form = YogaClassForm
     list_display = ('id', 'title', 'class_type', 'start_time', 'end_time', 'location')
-    list_filter = ('class_type','class_type')
+    list_filter = ('class_type',)
     search_fields = ('title', 'location')
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'medical_conditions')
+    search_fields = ('user__username', 'medical_conditions')
 

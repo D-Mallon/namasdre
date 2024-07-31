@@ -3,20 +3,32 @@ from django.contrib.auth import login, logout, authenticate, update_session_auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-
-from core.models import YogaClassBooking
+from django.db import transaction, IntegrityError
+from django.contrib.auth.models import User
+from core.models import YogaClassBooking, Profile
 from .forms import ProfileUpdateForm, RegisterForm, CustomPasswordChangeForm
 
 # Create your views here.
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
+        print("CSRF token from POST:", request.POST.get('csrfmiddlewaretoken'))
         if form.is_valid():
-            form.save()
-            return redirect("home")
+            try:
+                with transaction.atomic():
+                    user = form.save(commit=False)
+                    user.save()
+                    if not Profile.objects.filter(user=user).exists():
+                        Profile.objects.create(user=user, medical_conditions=form.cleaned_data.get('medical_conditions'))
+                    login(request, user)
+                    return redirect("home")
+            except IntegrityError as e:
+                print(f"IntegrityError: {e}")
+                form.add_error(None, "An error occurred. Please try again.")
+        else:
+            print("Form errors:", form.errors)
     else:
         form = RegisterForm()
-
     return render(request, "register/register.html", {"form": form})
 
 def custom_login(request):

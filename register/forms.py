@@ -22,7 +22,7 @@ class RegisterForm(UserCreationForm):
         user = super(RegisterForm, self).save(commit=False)
         if commit:
             user.save()
-            Profile.objects.create(user=user, medical_conditions=self.cleaned_data.get('medical_conditions'))
+            # Profile creation is handled by the signal
         return user
 
 class ProfileUpdateForm(UserChangeForm):
