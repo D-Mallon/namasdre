@@ -12,14 +12,13 @@ from .forms import ProfileUpdateForm, RegisterForm, CustomPasswordChangeForm
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
-        print("CSRF token from POST:", request.POST.get('csrfmiddlewaretoken'))
         if form.is_valid():
             try:
                 with transaction.atomic():
-                    user = form.save(commit=False)
-                    user.save()
-                    if not Profile.objects.filter(user=user).exists():
-                        Profile.objects.create(user=user, medical_conditions=form.cleaned_data.get('medical_conditions'))
+                    user = form.save(commit=True)  # Save and create profile via signal
+                    # Update profile with medical_conditions
+                    user.profile.medical_conditions = form.cleaned_data.get('medical_conditions')
+                    user.profile.save()
                     login(request, user)
                     return redirect("home")
             except IntegrityError as e:

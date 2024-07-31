@@ -8,7 +8,7 @@ class RegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=30, required=True)
     medical_conditions = forms.CharField(
-        max_length=300, 
+        max_length=300,
         label='Medical or Physical Conditions (please let us know any relevant details)',
         widget=forms.Textarea(attrs={'rows': 4, 'cols': 40, 'class': 'medical-conditions-input'}),
         required=False
@@ -17,12 +17,14 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "first_name", "last_name", "email", "password1", "password2", "medical_conditions"]
-        
+
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
         if commit:
             user.save()
-            # Profile creation is handled by the signal
+            # Update profile with medical_conditions
+            user.profile.medical_conditions = self.cleaned_data.get('medical_conditions')
+            user.profile.save()
         return user
 
 class ProfileUpdateForm(UserChangeForm):
