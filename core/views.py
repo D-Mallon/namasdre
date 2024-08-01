@@ -8,6 +8,9 @@ from django.utils import timezone
 import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.conf import settings
+from .forms import ContactForm
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -47,23 +50,39 @@ def timetable(request):
 
 def contact(request):
     if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        message = request.POST['message']
-        
-        # Send email
-        send_mail(
-            f"Contact Form Submission from {name}",
-            message,
-            email,
-            ['info@namasdre.com'],
-            fail_silently=False,
-        )
-        
-        return HttpResponse('Thank you for your message.')
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Cleaned data from the form
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
 
-    return render(request, 'core/contact_page.html')
+            # Construct the email subject and message
+            subject = f"Contact Form Submission from {name}"
+            message_body = f"Message from {name} ({email}):\n\n{message}"
 
+            try:
+                # Send the email using Django's send_mail function
+                send_mail(
+                    subject,
+                    message_body,
+                    settings.DEFAULT_FROM_EMAIL,  # From email
+                    ['namasdreinfo@gmail.com'],    # To email
+                    fail_silently=False,
+                )
+                # Redirect to the same page with a success message
+                return redirect('contact')
+            except Exception as e:
+                # Handle errors and possibly display an error message
+                print(f"An error occurred while sending the email: {e}")
+                # Optionally, set an error message in the form
+                form.add_error(None, 'An error occurred while sending the email. Please try again.')
+
+    else:
+        form = ContactForm()
+
+    # Render the contact page with the form
+    return render(request, 'core/contact_page.html', {'form': form})
 
 @login_required
 def booking_portal(request):
