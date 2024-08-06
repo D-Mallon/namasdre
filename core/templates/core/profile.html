@@ -29,7 +29,7 @@
               {{ booking.yoga_class.start_time|date:"l, d F" }}<br>
               {{ booking.yoga_class.start_time|time:"g:i A" }} – {{ booking.yoga_class.end_time|time:"g:i A" }}
             </p>
-            <p class="class-title">{{ booking.yoga_class.title }}</p>
+            <p class="class-title"><b>{{ booking.yoga_class.title }}</b></p>
             {% if booking.yoga_class.class_type == 'online' %}
             <p class="class-location">Online class (Zoom)</p>
             {% else %}
@@ -37,7 +37,7 @@
             {% endif %}
           </div>
           <div class="cancel-button-container">
-            <button type="button" class="cancel-button" onclick="cancelBooking({{ booking.id }})">Cancel Booking</button>
+            <button type="button" class="cancel-button" onclick="cancelBooking({{ booking.id }})">Remove Booking</button>
           </div>
         </div>
         {% endfor %}
@@ -57,7 +57,7 @@
             <p class="class-datetime">
               {{ booking.yoga_class.start_time|date:"l, d F" }}, {{ booking.yoga_class.start_time|time:"g:i A" }} – {{ booking.yoga_class.end_time|time:"g:i A" }}
             </p>
-            <p class="class-title">{{ booking.yoga_class.title }}</p>
+            <p class="class-title"><b>{{ booking.yoga_class.title }}</b></p>
             <p class="class-location">{{ booking.yoga_class.location }}</p>
           </div>
         </div>
