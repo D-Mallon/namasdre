@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% load static %}
     <link rel="stylesheet" href="{% static 'shared/css/main.css' %}" />
+    <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
     <!-- Additional shared CSS or JS files can be included here -->
   </head>
   <body>
@@ -22,12 +23,15 @@
       </div>
       <ul id="menu">
         <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="/timetable">Timetable</a></li>
-        <li><a href="/bookingportal?next={{ request.path }}">Booking Portal</a></li>
+        <li><a href="{% url 'timetable' %}">Timetable</a></li>
+        <li><a href="{% url 'booking_portal' %}?next={{ request.path }}">Booking Portal</a></li>
         {% if user.is_authenticated %}
-        <li><a href="/profile">Profile</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        {% if can_manage_classes %}
+        <li><a href="{% url 'manage_classes' %}">Manage Classes</a></li>
         {% endif %}
-        <li><a href="/contact">Contact</a></li>
+        {% endif %}
+        <li><a href="{% url 'contact' %}">Contact</a></li>
         {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
         {% else %}

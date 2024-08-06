@@ -9,15 +9,21 @@ import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
-from .forms import ContactForm
+from .forms import ContactForm, YogaClassForm
 from django.core.mail import send_mail
+from .models import YogaClass
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'core/index.html')
+    can_manage_classes = request.user.has_perm('core.manage_classes')
+    return render(request, 'core/index.html', {
+        'can_manage_classes': can_manage_classes
+        })
 
 def timetable(request):
+    can_manage_classes = request.user.has_perm('core.manage_classes')
     now = timezone.now()
     # Get classes for today
     today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -46,9 +52,12 @@ def timetable(request):
         'in_person_classes': in_person_classes,
         'now': now,
     }
-    return render(request, 'core/timetable.html', context)
+    return render(request, 'core/timetable.html', context, {
+        'can_manage_classes': can_manage_classes
+        })
 
 def contact(request):
+    can_manage_classes = request.user.has_perm('core.manage_classes')
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -82,10 +91,13 @@ def contact(request):
         form = ContactForm()
 
     # Render the contact page with the form
-    return render(request, 'core/contact_page.html', {'form': form})
+    return render(request, 'core/contact_page.html', {'form': form}, {
+        'can_manage_classes': can_manage_classes
+        })
 
 @login_required
 def booking_portal(request):
+    can_manage_classes = request.user.has_perm('core.manage_classes')
     if request.user.is_authenticated:
         now = timezone.now()
         # Removing prior classes from the booking portal so that only future classes are shown
@@ -108,11 +120,15 @@ def booking_portal(request):
             'in_person_classes': in_person_classes,
             'now': now,
         }
-        return render(request, 'core/booking_portal.html', context)
+        return render(request, 'core/booking_portal.html', context, {
+        'can_manage_classes': can_manage_classes
+        })
         # return render(request, 'core/booking_portal.html')
     else: 
         print('You must be logged in to access this page.')
-        return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'})
+        return render(request, 'core/index.html', {'error': 'You must be logged in to access this page.'}, {
+        'can_manage_classes': can_manage_classes
+        })
 
 @login_required
 def add_class_to_profile(request, class_id):
@@ -144,6 +160,7 @@ def remove_class_from_profile(request, class_id):
 
 @login_required  
 def profile(request):
+    can_manage_classes = request.user.has_perm('core.manage_classes')
     now = timezone.now()
     booked_classes = YogaClassBooking.objects.filter(user=request.user).order_by('yoga_class__start_time')
 
@@ -156,4 +173,80 @@ def profile(request):
         'past_classes': past_classes,
     }
     
-    return render(request, 'core/profile.html', context)
+    return render(request, 'core/profile.html', context, {
+        'can_manage_classes': can_manage_classes
+        })
+
+@login_required
+def manage_classes(request):
+    # Check if the user has the 'manage_classes' permission
+    if not request.user.has_perm('core.manage_classes'):
+        raise PermissionDenied("You do not have permission to manage classes.")
+
+    if request.method == 'POST':
+        form = YogaClassForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Class has been added successfully!')
+            return redirect('manage_classes')  # Redirect to the same page
+        else:
+            messages.error(request, 'There was an error adding the class. Please check the form.')
+    else:
+        form = YogaClassForm()
+
+    # Get all classes to display
+    classes = YogaClass.objects.all().order_by('start_time')
+    return render(request, 'core/manage_classes.html', {'form': form, 'classes': classes})
+
+@login_required
+def edit_class(request, class_id):
+    yoga_class = get_object_or_404(YogaClass, id=class_id)
+    if request.method == 'POST':
+        form = YogaClassForm(request.POST, instance=yoga_class)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Class updated successfully!')
+            return redirect('manage_classes')
+    else:
+        form = YogaClassForm(instance=yoga_class)
+    return render(request, 'core/edit_class.html', {'form': form, 'yoga_class': yoga_class})
+
+@login_required
+def delete_class(request, class_id):
+    yoga_class = get_object_or_404(YogaClass, id=class_id)
+    if request.method == 'POST':
+        yoga_class.delete()
+        messages.success(request, 'Class deleted successfully!')
+        return redirect('manage_classes')
+    return render(request, 'core/delete_class.html', {'yoga_class': yoga_class})
+
+@login_required
+def manage_classes(request):
+    # Check if the user has the 'add_yogaclass' permission
+    if not request.user.has_perm('core.add_yogaclass'):
+        raise PermissionDenied
+
+    if request.method == 'POST':
+        form = YogaClassForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Class has been added successfully!')
+            return redirect('manage_classes')  # Redirect to the same page
+        else:
+            messages.error(request, 'There was an error adding the class. Please check the form.')
+    else:
+        form = YogaClassForm()
+
+    # Get all classes to display
+    classes = YogaClass.objects.all().order_by('start_time')
+    return render(request, 'core/manage_classes.html', {'form': form, 'classes': classes, 'can_manage_classes': True})
+
+@login_required
+def some_view(request):
+    can_manage_classes = request.user.has_perm('core.manage_classes')
+    return render(request, 'your_template.html', {
+        'can_manage_classes': can_manage_classes,
+    })
+    
+def permission_denied(request, exception):
+    return render(request, 'core/permission_denied.html', status=403)

@@ -13,6 +13,11 @@ class YogaClass(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     location = models.CharField(max_length=255, blank=True, null=True)
+    
+    class Meta:
+        permissions = [
+            ("manage_classes", "Can manage yoga classes"),
+        ]
 
     def save(self, *args, **kwargs):
         if not timezone.is_aware(self.start_time):

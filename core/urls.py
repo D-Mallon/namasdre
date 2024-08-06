@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import home, contact, timetable, booking_portal, profile, add_class_to_profile, remove_class_from_profile
+from .views import home, contact, timetable, booking_portal, profile, add_class_to_profile, remove_class_from_profile, manage_classes, edit_class, delete_class
 from register import views as register_views
 
 urlpatterns = [
@@ -18,4 +18,7 @@ urlpatterns = [
     path('profile', profile, name='profile'),
     path('update_profile/', register_views.update_profile, name='update_profile'),
     path('register/', register_views.register, name='register'),
+    path('manage_classes/', manage_classes, name='manage_classes'),
+    path('edit_class/<int:class_id>/', edit_class, name='edit_class'),
+    path('delete_class/<int:class_id>/', delete_class, name='delete_class'),
 ]

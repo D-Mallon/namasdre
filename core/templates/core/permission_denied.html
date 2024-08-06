@@ -1,0 +1,9 @@
+{% extends "shared/base.html" %}
+{% block title %}Permission Denied{% endblock %}
+{% block content %}
+<div class="permission-denied-container">
+    <h2>Permission Denied</h2>
+    <p>You do not have permission to access this page.</p>
+    <a href="{% url 'home' %}" class="btn btn-primary">Return to Home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "shared/base.html" %}
+{% block title %}Delete Class{% endblock %}
+{% block content %}
+<div class="delete-class-container">
+  <h2>Are you sure you want to delete the class "{{ yoga_class.title }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'manage_classes' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
