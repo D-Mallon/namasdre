@@ -19,11 +19,12 @@
         {% for class in online_classes %}
         <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
           <p class="class-datetime">
-            {{ class.start_time|date:"l, F d" }}<br>
+            {{ class.start_time|date:"l, d F" }}<br>
             {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
           </p>
-          <p class="class-title">
+          <p class="class-title"><b>
             {{ class.title }}
+          </b>
           </p>
           <p class="class-location">
             {{ class.location }}
@@ -44,7 +45,7 @@
         {% for class in in_person_classes %}
         <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
           <p class="class-datetime">
-            {{ class.start_time|date:"l, F d" }}<br>
+            {{ class.start_time|date:"l, d F" }}<br>
             {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
           </p>
           <p class="class-title"><b>

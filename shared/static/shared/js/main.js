@@ -99,28 +99,29 @@
     }
   }
 
-  // Add the cancelBooking function
+  // cancelBooking function
   window.cancelBooking = function (bookingId) {
-    const csrftoken = getCookie("csrftoken");
-    fetch(`/remove_class_from_profile/${bookingId}/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          const classItem = document.getElementById(`class-item-${bookingId}`);
-          if (classItem) {
-            classItem.remove();
-            showPopupMessage(data.message);
-          }
-        } else {
-          showPopupMessage("Failed to remove the booking.");
-        }
+    // console.log("Cancel button clicked for booking ID:", bookingId); // Debugging line
+
+    if (confirm("Are you sure you want to cancel this booking?")) {
+      const csrftoken = getCookie("csrftoken"); // Use the correct function to get the CSRF token
+      fetch(`/remove_class_from_profile/${bookingId}/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
       })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            document.getElementById(`class-item-${bookingId}`).remove();
+            showPopupMessage(data.message);
+          } else {
+            showPopupMessage("Failed to remove the booking.");
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
   };
 })(jQuery);

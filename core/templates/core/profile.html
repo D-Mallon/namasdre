@@ -9,31 +9,145 @@
   </div>
 </header>
 <div class="timetable-container custom-timetable">
-  <h2>Namaste {{ user.first_name }}</h2>
-  <p>Update your user information <a href="{% url 'update_profile' %}" style="color: blue;">here</a>.<br></p>
-  <p>Existing medical conditions you want us to be aware of which might effect your practice:<br><br> {{ user.profile.medical_conditions }}</p>
-  <h2 class="classType">Your Booked Classes</h2>
-  <div class="class-list">
-    {% if booked_classes %}
-      {% for booking in booked_classes %}
-      <div class="class-item" id="class-item-{{ booking.id }}">
-        <div class="class-info">
-          <p class="class-datetime">
-            {{ booking.yoga_class.start_time|date:"l, F d" }}<br>
-            {{ booking.yoga_class.start_time|time:"g:i A" }} – {{ booking.yoga_class.end_time|time:"g:i A" }}
-          </p>
-          <p class="class-title">{{ booking.yoga_class.title }}</p>
-          <p class="class-location">{{ booking.yoga_class.location }}</p>
+  <div class="user-info">
+    <h2>Namaste {{ user.first_name }}</h2>
+    <p><a href="{% url 'update_profile' %}" class="edit-profile-link">Update your user information here</a>.</p><br>
+    <div class="medical-info">
+      <h3 class="medical-info-h3">Current Medical Conditions:</h3>
+      <p>{{ user.profile.medical_conditions|default:"None" }}</p>
+    </div>
+  </div>
+
+  <div class="classes-section">
+    <h2 class="classType">Upcoming Booked Classes</h2>
+    <div class="class-list">
+      {% if upcoming_classes %}
+        {% for booking in upcoming_classes %}
+        <div class="class-item" id="class-item-{{ booking.id }}">
+          <div class="class-info">
+            <p class="class-datetime">
+              {{ booking.yoga_class.start_time|date:"l, d F" }}<br>
+              {{ booking.yoga_class.start_time|time:"g:i A" }} – {{ booking.yoga_class.end_time|time:"g:i A" }}
+            </p>
+            <p class="class-title">{{ booking.yoga_class.title }}</p>
+            {% if booking.yoga_class.class_type == 'online' %}
+            <p class="class-location">Online class (Zoom)</p>
+            {% else %}
+            <p class="class-location">{{ booking.yoga_class.location }}</p>
+            {% endif %}
+          </div>
+          <div class="cancel-button-container">
+            <button type="button" class="cancel-button" onclick="cancelBooking({{ booking.id }})">Cancel Booking</button>
+          </div>
         </div>
-        <div class="cancel-button-container">
-          <button type="button" class="cancel-button" onclick="cancelBooking({{ booking.id }})">Cancel Booking</button>
+        {% endfor %}
+      {% else %}
+        <p>You have no upcoming classes booked.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="classes-section">
+    <h2 class="classType">Your Past Classes</h2>
+    <div class="class-list">
+      {% if past_classes %}
+        {% for booking in past_classes %}
+        <div class="class-item finished-class-item" id="class-item-{{ booking.id }}">
+          <div class="class-info">
+            <p class="class-datetime">
+              {{ booking.yoga_class.start_time|date:"l, d F" }}, {{ booking.yoga_class.start_time|time:"g:i A" }} – {{ booking.yoga_class.end_time|time:"g:i A" }}
+            </p>
+            <p class="class-title">{{ booking.yoga_class.title }}</p>
+            <p class="class-location">{{ booking.yoga_class.location }}</p>
+          </div>
         </div>
-      </div>
-      {% endfor %}
-    {% else %}
-      <p>You have not booked any classes yet.</p>
-    {% endif %}
+        {% endfor %}
+      {% else %}
+        <p>You have not attended any classes yet.</p>
+      {% endif %}
+    </div>
   </div>
 </div>
+
 <div id="popup-message" class="popup-message"></div>
+
+{% comment %} <style>
+  .user-info {
+    margin-bottom: 2em;
+    text-align: center;
+  }
+  .medical-info {
+    background-color: #f9f9f9;
+    padding: 1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 1em;
+  }
+  .classes-section {
+    margin-bottom: 3em;
+  }
+  .edit-profile-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .edit-profile-link:hover {
+    text-decoration: underline;
+  }
+  .class-list {
+    text-align: center;
+  }
+  .class-item, .finished-class-item {
+    padding: 1em;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1em;
+  }
+  .finished-class-item {
+    background-color: #f0f0f0;
+  }
+  .class-info {
+    margin-bottom: 1em;
+  }
+  .cancel-button-container {
+    text-align: center;
+  }
+  .cancel-button {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px #666666;
+    color: #444444 !important;
+    padding: 0.75em 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .cancel-button:hover {
+    color: #ef6480 !important;
+    box-shadow: inset 0 0 0 2px #ef6480;
+  }
+</style> {% endcomment %}
+
+{% comment %} <script>
+  function cancelBooking(bookingId) {
+    if (confirm("Are you sure you want to cancel this booking?")) {
+      fetch(`/remove_class_from_profile/${bookingId}/`, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": "{{ csrf_token }}",
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById(`class-item-${bookingId}`).remove();
+          alert(data.message);
+        } else {
+          alert("Failed to cancel booking: " + data.message);
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+    }
+  }
+</script> {% endcomment %}
 {% endblock %}

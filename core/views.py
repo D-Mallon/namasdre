@@ -137,8 +137,23 @@ def remove_class_from_profile(request, class_id):
 
 
 
+# @login_required  
+# def profile(request):
+#     booked_classes = YogaClassBooking.objects.filter(user=request.user).order_by('yoga_class__start_time')
+#     return render(request, 'core/profile.html', {'booked_classes': booked_classes})
+
 @login_required  
 def profile(request):
+    now = timezone.now()
     booked_classes = YogaClassBooking.objects.filter(user=request.user).order_by('yoga_class__start_time')
-    return render(request, 'core/profile.html', {'booked_classes': booked_classes})
 
+    # Separate upcoming and past classes
+    upcoming_classes = booked_classes.filter(yoga_class__start_time__gte=now)
+    past_classes = booked_classes.filter(yoga_class__start_time__lt=now)
+
+    context = {
+        'upcoming_classes': upcoming_classes,
+        'past_classes': past_classes,
+    }
+    
+    return render(request, 'core/profile.html', context)

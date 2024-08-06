@@ -1929,7 +1929,8 @@ body.is-loading #header.alt .inner {
 .finished-class-item {
   padding: 1em;
   border-bottom: 1px solid #ddd;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
+  background-color: #f0f0f0;
   color: #888;
 }
 
@@ -2001,6 +2002,7 @@ body.is-loading #header.alt .inner {
   justify-content: center; /* Center the button */
 }
 
+/*
 .cancel-button {
   background-color: transparent;
   box-shadow: inset 0 0 0 2px #666666;
@@ -2011,8 +2013,55 @@ body.is-loading #header.alt .inner {
   cursor: pointer;
   text-align: center;
   white-space: normal; /* Allow text to wrap */
+/*max-width: 100%; /* Ensure it does not exceed its container */
+/* width: auto; Make button take full width of parent, use 100% */
+/* }  */
+
+.cancel-button {
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px #666666;
+  color: #444444 !important;
+  padding: 0.75em 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  white-space: normal; /* Allow text to wrap */
   max-width: 100%; /* Ensure it does not exceed its container */
-  width: auto; /* Make button take full width of parent, use 100% */
+  width: auto; /* Adjust width to fit content, use width: 100% for full width */
+}
+
+.user-info {
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.medical-info {
+  background-color: #f9f9f9;
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top: 1em;
+}
+
+.medical-info-h3 {
+  text-align: center;
+}
+
+.classes-section {
+  margin-bottom: 3em;
+}
+
+.edit-profile-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.edit-profile-link:hover {
+  text-decoration: underline;
 }
 
 /* ************************************************************* */
