@@ -58,7 +58,9 @@ def contact(request):
                     ['namasdreinfo@gmail.com'],
                     fail_silently=False,
                 )
-                return redirect('contact')
+                # Set the success message
+                messages.success(request, "Contact form submitted successfully. Thanks for your message.")
+                return redirect('contact')  # Use redirect instead of render
             except Exception as e:
                 print(f"An error occurred while sending the email: {e}")
                 form.add_error(None, 'An error occurred while sending the email. Please try again.')

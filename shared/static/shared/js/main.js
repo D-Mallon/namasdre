@@ -45,6 +45,73 @@
       // Remove original image.
       $img.remove();
     });
+
+    // Check for popup trigger
+    const popupOverlay = document.querySelector(".popup-overlay");
+    const closePopupButton = document.querySelector(".close-popup-button");
+
+    if (popupOverlay) {
+      console.log("Popup overlay detected");
+      const successMessage = document.querySelector(
+        ".popup-message-content"
+      ).innerText;
+      if (successMessage) {
+        popupOverlay.style.display = "flex"; // Show the popup if there's a message
+        console.log("Showing popup with message:", successMessage);
+      }
+
+      if (closePopupButton) {
+        console.log("Close button detected");
+        closePopupButton.addEventListener("click", function () {
+          popupOverlay.style.display = "none"; // Hide the popup
+          location.reload(); // Refresh the page after closing the popup
+        });
+      } else {
+        console.log("Close button not found");
+      }
+    } else {
+      console.log("Popup overlay not found");
+    }
+
+    // Intercept form submission to show popup first
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        fetch(contactForm.action, {
+          method: "POST",
+          body: new FormData(contactForm),
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              response.text().then((html) => {
+                if (popupOverlay) {
+                  popupOverlay.style.display = "flex"; // Show the popup
+                  // Attach close button click event
+                  if (closePopupButton) {
+                    closePopupButton.addEventListener("click", function () {
+                      popupOverlay.style.display = "none"; // Hide the popup
+                      location.reload(); // Refresh the page after closing the popup
+                    });
+                  }
+                }
+              });
+            } else {
+              alert(
+                "There was an issue submitting the form. Please try again."
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          });
+      });
+    }
   });
 
   // Function to get CSRF token
@@ -85,26 +152,30 @@
 
   // Function to show popup message
   function showPopupMessage(message) {
-    const popup = document.getElementById("popup-message");
-    if (popup) {
-      popup.innerText = message;
-      popup.classList.add("show");
-      setTimeout(function () {
-        popup.classList.remove("show");
-      }, 3000);
+    const popupOverlay = document.querySelector(".popup-overlay");
+    const popupMessage = document.querySelector(".popup-message-content");
 
-      document.addEventListener("click", function () {
-        popup.classList.remove("show");
-      });
+    if (popupOverlay && popupMessage) {
+      popupMessage.innerText = message;
+      popupOverlay.style.display = "flex"; // Show the popup
+
+      console.log("Showing popup with message:", message);
+
+      // Add click event to close button
+      const closePopupButton = document.querySelector(".close-popup-button");
+      if (closePopupButton) {
+        closePopupButton.addEventListener("click", function () {
+          popupOverlay.style.display = "none"; // Hide the popup
+          // location.reload(); // Refresh the page after closing the popup if we want this. currently I don't think its needed as the page redirects on form submission initially anyway
+        });
+      }
     }
   }
 
   // cancelBooking function
   window.cancelBooking = function (bookingId) {
-    // console.log("Cancel button clicked for booking ID:", bookingId); // Debugging line
-
     if (confirm("Are you sure you want to cancel this booking?")) {
-      const csrftoken = getCookie("csrftoken"); // Use the correct function to get the CSRF token
+      const csrftoken = getCookie("csrftoken");
       fetch(`/remove_class_from_profile/${bookingId}/`, {
         method: "POST",
         headers: {
