@@ -2378,7 +2378,7 @@ th {
 
 td .edit-button,
 td .delete-button {
-  width: auto /* Ensure width is expanding in those buttons so that the wording doesn't run out of it */
+  width: auto; /* Ensure width is expanding in those buttons so that the wording doesn't run out of it */
   height: 40px; /* Ensure consistent height */
   display: inline-flex;
   align-items: center;
