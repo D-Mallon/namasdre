@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from decouple import config
+# Q: why are we using decouple here instead of os.import?
 
 # Load environment variables from .env file
 load_dotenv()
@@ -30,7 +32,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'optional_default_secret_key_for_dev
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
 
 
 # Application definition
@@ -99,13 +102,26 @@ WSGI_APPLICATION = "namasdre_project.wsgi.application"
 #     }
 # }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+# version above was working fine. I have commented it out for the purposes of testing the introduction of django.
+
+# Q: why are we using decouple here instead of os.import?
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('MYSQL_DATABASE'),
+        'USER': config('MYSQL_USER'),
+        'PASSWORD': config('MYSQL_PASSWORD'),
+        'HOST': config('DB_HOST', 'db'),  # Use 'db' as default from .env
+        'PORT': config('DB_PORT', '3306'),  # Use '3306' as default from .env
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
