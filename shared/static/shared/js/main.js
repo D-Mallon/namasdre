@@ -152,23 +152,17 @@
 
   // Function to show popup message
   function showPopupMessage(message) {
-    const popupOverlay = document.querySelector(".popup-overlay");
-    const popupMessage = document.querySelector(".popup-message-content");
+    const popupOverlay = document.getElementById("popup-message");
+    if (popupOverlay) {
+      popupOverlay.innerText = message;
+      popupOverlay.classList.add("show");
+      setTimeout(function () {
+        popupOverlay.classList.remove("show");
+      }, 3000);
 
-    if (popupOverlay && popupMessage) {
-      popupMessage.innerText = message;
-      popupOverlay.style.display = "flex"; // Show the popup
-
-      console.log("Showing popup with message:", message);
-
-      // Add click event to close button
-      const closePopupButton = document.querySelector(".close-popup-button");
-      if (closePopupButton) {
-        closePopupButton.addEventListener("click", function () {
-          popupOverlay.style.display = "none"; // Hide the popup
-          // location.reload(); // Refresh the page after closing the popup if we want this. currently I don't think its needed as the page redirects on form submission initially anyway
-        });
-      }
+      document.addEventListener("click", function () {
+        popupOverlay.classList.remove("show");
+      });
     }
   }
 
