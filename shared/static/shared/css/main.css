@@ -2280,3 +2280,115 @@ body.is-loading #header.alt .inner {
 .login-container .form-group {
   margin-bottom: 1.5em; /* Adjust spacing as needed */
 }
+
+/* ************************************************************* */
+/* ******************* Custom Styling ************************** */
+/* ************************************************************* */
+
+/* Dre class setup specific styling */
+/* Container for centering content */
+.centered-container {
+  margin: 5% auto; /* Margin from top and sides */
+  padding: 20px;
+  max-width: 90%; /* Max width of the container */
+  max-height: 90%; /* Max height of the container */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.greeting {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.add-button,
+.edit-button,
+.delete-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  height: 40px; /* Ensure consistent height */
+  white-space: normal; /* Prevent text from wrapping */
+}
+
+.add-button {
+  background-color: #28a745; /* Green */
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+.edit-button {
+  background-color: #ffc107; /* Amber */
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red */
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.inline-form {
+  display: inline-block;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.no-classes {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+td .edit-button,
+td .delete-button {
+  width: auto /* Ensure width is expanding in those buttons so that the wording doesn't run out of it */
+  height: 40px; /* Ensure consistent height */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle; /* Ensure vertical alignment */
+}
+
+td .inline-form {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
