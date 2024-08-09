@@ -1,5 +1,15 @@
+annotated-types==0.7.0
 asgiref==3.7.2
+bootstrap4==0.1.0
+crispy-bootstrap4==2024.1
 Django==4.2.10
+django-crispy-forms==2.2
+django-flatpickr==2.0.3
+mysqlclient==2.1.1
+pydantic==2.8.2
+pydantic-settings==2.3.4
+pydantic_core==2.20.1
+python-decouple==3.8
 python-dotenv==1.0.1
 sqlparse==0.4.4
 typing_extensions==4.9.0

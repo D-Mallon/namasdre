@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'optional_default_secret_key_for_dev
 DEBUG = True
 
 # ALLOWED_HOSTS = []
-DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost').split(',')
 
 
 # Application definition
@@ -161,6 +161,9 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'shared/static/'),]
+# adding the below line to serve static files in production - needed when trying to set up Docker
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

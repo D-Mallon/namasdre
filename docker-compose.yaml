@@ -1,7 +1,9 @@
-version: "3"
+# version: "3"
+# Can remove / comment out the version now because Docker should default to the latest version
+
 services:
   db:
-    image: mysql:5.7
+    image: mariadb:10.5
     container_name: namasdre_container
     restart: always
     volumes:
@@ -12,20 +14,10 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3306:3306"
+      # host_port:container_port --> port on your local machine:port inside the Docker container (also 3306 for MySQL)
+      - "3307:3306"
     healthcheck:
-      test:
-        [
-          "CMD",
-          "mysql",
-          "-h",
-          "localhost",
-          "-u",
-          "root",
-          "-p${DB_ROOT_PASSWORD}",
-          "-e",
-          "SELECT 1",
-        ]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
 
@@ -34,16 +26,22 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: namasdre_backend_container
-    command: sh -c "python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "python3 manage.py migrate --noinput &&
+             python3 manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
     restart: always
     volumes:
       - .:/app
+      - ./staticfiles:/app/staticfiles # Volume for static files
     ports:
       - "8000:8000"
     env_file:
       - .env
     depends_on:
-      - db:
-          condition: service_healthy
+      db:
+        condition: service_healthy
+
 volumes:
   data:
+    driver: local
