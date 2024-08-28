@@ -33,8 +33,12 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'optional_default_secret_key_for_dev
 DEBUG = True
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost').split(',')
+# ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost').split(',')
+# ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='3.255.167.61,localhost').split(',')
+# Existing EC2 public IP and localhost
+DEFAULT_ALLOWED_HOSTS = '3.255.167.61,localhost,namasdreyoga.ie,www.namasdreyoga.ie'
 
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default=DEFAULT_ALLOWED_HOSTS).split(',')
 
 # Application definition
 
@@ -118,8 +122,8 @@ DATABASES = {
         'NAME': config('MYSQL_DATABASE'),
         'USER': config('MYSQL_USER'),
         'PASSWORD': config('MYSQL_PASSWORD'),
-        'HOST': config('DB_HOST', 'db'),  # Use 'db' as default from .env
-        'PORT': config('DB_PORT', '3306'),  # Use '3306' as default from .env
+        'HOST': config('DB_HOST'),  # Use 'db' as default from .env
+        'PORT': config('DB_PORT'),  # Use '3306' as default from .env
     }
 }
 
