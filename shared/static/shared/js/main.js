@@ -69,9 +69,10 @@
       } else {
         console.log("Close button not found");
       }
-    } else {
-      console.log("Popup overlay not found");
     }
+    // } else {
+    //   console.log("Popup overlay not found");
+    // }
 
     // Intercept form submission to show popup first
     const contactForm = document.getElementById("contactForm");

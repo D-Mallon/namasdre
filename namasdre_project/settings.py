@@ -40,6 +40,10 @@ DEFAULT_ALLOWED_HOSTS = '3.255.167.61,localhost,namasdreyoga.ie,www.namasdreyoga
 
 ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default=DEFAULT_ALLOWED_HOSTS).split(',')
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
+
 # Application definition
 
 INSTALLED_APPS = [
