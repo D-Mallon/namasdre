@@ -123,11 +123,11 @@ WSGI_APPLICATION = "namasdre_project.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_DATABASE'),
-        'USER': config('MYSQL_USER'),
-        'PASSWORD': config('MYSQL_PASSWORD'),
-        'HOST': config('DB_HOST'),  # Use 'db' as default from .env
-        'PORT': config('DB_PORT'),  # Use '3306' as default from .env
+        'NAME': config('MYSQL_DATABASE', default='your_default_db_name'),
+        'USER': config('MYSQL_USER', default='your_default_user'),
+        'PASSWORD': config('MYSQL_PASSWORD', default='your_default_password'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='3306'),
     }
 }
 
@@ -172,6 +172,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'shared/static/'),]
 # adding the below line to serve static files in production - needed when trying to set up Docker
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Add this to ensure Django collects files from all apps
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

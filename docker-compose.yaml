@@ -26,22 +26,21 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: namasdre_backend_container
-    command: >
-      sh -c "python3 manage.py migrate --noinput &&
-             python3 manage.py collectstatic --noinput &&
-             python manage.py runserver 0.0.0.0:8000"
     restart: always
     volumes:
-      - .:/app
-      - ./staticfiles:/app/staticfiles # Volume for static files
+      - ./staticfiles:/app/staticfiles # Mount the static files
     ports:
       - "8000:8000"
     env_file:
       - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=namasdre_project.settings
     depends_on:
       db:
         condition: service_healthy
 
 volumes:
   data:
-    driver: local
+    driver: local # This defines the named volume for static files
+
+# In this configuration:we define a volume named static_volume in the top-level volumes section. We use this named volume in the backend service, mapping it to /app/staticfiles in the container.
