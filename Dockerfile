@@ -1,4 +1,3 @@
-# Build stage
 FROM python:3.9.13-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1

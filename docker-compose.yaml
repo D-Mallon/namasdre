@@ -4,7 +4,7 @@
 services:
   db:
     image: mariadb:10.5
-    container_name: namasdre_container
+    container_name: namasdre_db
     restart: always
     volumes:
       - data:/var/lib/mysql
@@ -28,13 +28,14 @@ services:
     container_name: namasdre_backend_container
     restart: always
     volumes:
-      - ./staticfiles:/app/staticfiles # Mount the static files
+      - ./staticfiles:/app/staticfiles
     ports:
       - "8000:8000"
     env_file:
       - .env
     environment:
       - DJANGO_SETTINGS_MODULE=namasdre_project.settings
+      - DB_HOST=db
     depends_on:
       db:
         condition: service_healthy
