@@ -142,3 +142,5 @@ cython_debug/
 # removing macos files
 .DS_Store
 shared/static/.DS_Store
+
+readme.md
