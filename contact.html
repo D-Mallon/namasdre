@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact - Namasdre Yoga & Wellness</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="shortcut icon" href="images/favicon.ico">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav id="navbar">
+      <div id="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="timetable.html">Class Timetables</a></li>
+        <li><a href="about.html">About Andrea</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <header id="header" class="alt">
+      <div class="inner">
+        <h1>Namasdre</h1>
+        <p id="page-title">Contact Details</p>
+      </div>
+    </header>
+    
+    <div class="contact-container">
+      <h1>Contact Andrea</h1>
+      <p class="contact_paragraphs">
+        Feel free to reach out for any inquiries or to book private sessions, workshops, or events.
+      </p>
+      
+      <div class="contact-info">
+        <h2>Phone Number</h2>
+        <p class="contact_paragraphs">
+          <a href="tel:+1234567890">+123 456 7890</a>
+        </p>
+
+        <h2>Email</h2>
+        <p class="contact_paragraphs">
+          <a href="mailto:namasdreinfo@gmail.com">namasdreinfo@gmail.com</a>
+        </p>
+
+        <h2>Follow Us on Instagram</h2>
+        <ul class="social-icons">
+          <li>
+            <a href="https://www.instagram.com/namasdreyoga/?igsh=ZTY5d3RrdmxraGI2" target="_blank" rel="noopener noreferrer" class="icon fa-instagram">
+              <span class="label">Instagram</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form id="contact-form" action="https://formspree.io/f/your-formspree-id" method="POST">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" rows="6" required></textarea>
+          </div>
+          <div class="actions">
+            <button type="submit" class="button big">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Popup Message -->
+    <div class="popup-overlay" style="display: none;">
+      <div class="popup">
+        <p class="popup-message-content"></p>
+        <button class="close-popup-button">Close</button>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
+  </body>
+</html> 
