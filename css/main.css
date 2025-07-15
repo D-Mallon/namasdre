@@ -1412,7 +1412,7 @@ table.alt tbody tr td {
   flex-direction: column;
   padding: 8em 0 6em 0;
   /* background-image: url("../../images/banner.jpg"); */
-  background-image: url("../images/hero.jpg");
+  background-image: url("../images/andrea_cover.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1487,6 +1487,7 @@ table.alt tbody tr td {
   height: 20em;
   min-height: 20em;
   min-height: 75vh;
+  width: 100%;
 }
 
 #header.alt:before {
