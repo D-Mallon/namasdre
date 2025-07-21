@@ -4,7 +4,7 @@
 {% block content %}
 <header id="header" class="alt">
   <div class="inner">
-    <h1>Namasdre</h1>
+    <h1><a href="/">Namasdre</a></h1>
     <p id="page-title">Class Timetable</p>
   </div>
 </header>
@@ -13,56 +13,20 @@
 
   <h2 class="classType">Online Classes</h2>
   <div class="class-list">
-    {% if online_classes %}
-      {% for class in online_classes %}
-      <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
-        <p class="class-datetime">
-          {{ class.start_time|date:"l, F d" }}<br>
-          {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
-        </p>
-        <p class="class-title">
-          <b>{{ class.title }}</b>
-        </p>
-        <p class="class-location">
-          {{ class.location }}
-        </p>
-        {% if class.start_time < now %}
-          <p id="finished-message">This class has already started / finished.</p>
-        {% endif %}
-      </div>
-      {% endfor %}
-    {% else %}
-      <p>No upcoming online classes</p>
-    {% endif %}
+    <p>For the most up-to-date schedule and to book classes, please visit:</p>
+    <p><a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer" class="button">Breathe Yoga & Pilates Booking System</a></p>
   </div>
 
   <h2 class="classType">In Person Classes</h2>
   <div class="class-list">
-    {% if in_person_classes %}
-      {% for class in in_person_classes %}
-      <div class="{% if class.start_time < now %}finished-class-item{% else %}class-item{% endif %}">
-        <p class="class-datetime">
-          {{ class.start_time|date:"l, F d" }}<br>
-          {{ class.start_time|time:"g:i A" }} – {{ class.end_time|time:"g:i A" }}
-        </p>
-        <p class="class-title"><b>
-          {{ class.title }}</b>
-        </p>
-        <p class="class-location">
-          {{ class.location }}
-        </p>
-        {% if class.start_time < now %}
-          <p id="finished-message">This class has already started / finished.</p>
-        {% endif %}
-      </div>
-      {% endfor %}
-    {% else %}
-      <p>No upcoming in-person classes</p>
-    {% endif %}
+    <p>For the most up-to-date schedule and to book in-person classes, please visit:</p>
+    <p><a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer" class="button">Breathe Yoga & Pilates Booking System</a></p>
+  </div>
+  
+  <h2 class="classType">Strength & Fitness Training</h2>
+  <div class="class-list">
+    <p>For personalised strength and fitness programming, please visit:</p>
+    <p><a href="https://www.thefundamentalbody.com" target="_blank" rel="noopener noreferrer" class="button">The Fundamental Body</a></p>
   </div>
 </div>
 {% endblock %}
-
-{% comment %} <p>
-  {{ class.start_time|date:"D, M d" }}: {{ class.title }} at {{ class.location }} ({{ class.start_time|time:"g:i A" }} - {{ class.end_time|time:"g:i A" }})
-</p> {% endcomment %}

@@ -91,6 +91,19 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
+/* Namasdre header link styling */
+h1 a {
+  text-decoration: none !important;
+  color: inherit !important;
+  border-bottom: none !important;
+}
+
+h1 a:hover {
+  color: inherit !important;
+  border-bottom: none !important;
+}
+
 .image.fit img {
   width: 100%;
   height: auto;
@@ -1393,32 +1406,15 @@ table.alt tbody tr td {
 
 #header {
   background-color: #444;
-  color: rgba(255, 255, 255, 0.75);
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  -moz-align-items: center;
-  -webkit-align-items: center;
-  -ms-align-items: center;
-  align-items: center;
-  -moz-justify-content: center;
-  -webkit-justify-content: center;
-  -ms-justify-content: center;
-  justify-content: center;
-  -moz-flex-direction: column;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 8em 0 6em 0;
-  /* background-image: url("../../images/banner.jpg"); */
-  background-image: url("/static/core/images/hero.jpg");
+  background-image: url("../../core/images/andrea_cover.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
-  text-align: center;
+  background-repeat: no-repeat;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 8em 0 8em 0;
   position: relative;
-  cursor: default;
+  text-align: center;
+  width: 100%;
 }
 
 #header input,
