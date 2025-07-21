@@ -1551,27 +1551,18 @@ body.is-loading #header.alt .inner {
   #header {
     padding: 4em 2em 2em 2em;
     background-attachment: scroll;
-    background-size: cover;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #222; /* fallback color for letterboxing */
   }
 
   #header.alt {
-    height: clamp(350px, 60vh, 500px);
-    min-height: 350px;
-    aspect-ratio: 1.5/1; /* More compact for mobile */
-  }
-
-  #header.alt h1 {
-    font-size: 2.5em;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  #header.alt p {
-    padding: 0;
-  }
-
-  #header.alt .inner {
-    max-width: 20em;
+    width: 100vw;
+    height: 56.25vw; /* 16:9 ratio for mobile, adjust as needed */
+    min-height: 0;
+    max-height: 100vh;
+    aspect-ratio: unset;
   }
 }
 
