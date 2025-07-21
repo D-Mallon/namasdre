@@ -1,10 +1,10 @@
 {% extends 'shared/base.html' %} {% load static %} {% block title %}Namasdre -
-Yoga & Wellness{% endblock %} {% block content %}
+Yoga & Coaching{% endblock %} {% block content %}
 <header id="header" class="alt">
   <div class="inner">
     <h1><a href="/">Namasdre</a></h1>
     {% comment %} <p id="page-title">Enhancing Your Mind-Body Connection Through Yoga</p> {% endcomment %}
-    <p>Enhancing Your Mind-Body Connection Through Yoga</p>
+    <p>INHABIT YOUR BODY - DWELL WITHIN</p>
   </div>
 </header>
 <!-- Wrapper -->
@@ -12,11 +12,10 @@ Yoga & Wellness{% endblock %} {% block content %}
   <!-- Banner -->
   <section id="intro" class="main">
     <span class="icon fa-diamond major"></span>
-    <h2>Welcome to Namasdre</h2>
+    <h2>Welcome</h2>
     <p>
-      Discover the transformative power of yoga and meditation.<br />
-      Join us on a journey to connect with inner peace, build strength, and enhance mobility.<br />
-      Explore our range of classes tailored for all levels.
+      We offer yoga, meditation, breathwork and bespoke strength and fitness programmes.<br />
+      Explore our offering of classes which are tailored for each individual.
     </p>
     <ul class="actions">
       <li><a href="timetable.html" class="button big">Discover More</a></li>
@@ -24,80 +23,123 @@ Yoga & Wellness{% endblock %} {% block content %}
   </section>
   <!-- Items -->
   <section class="main items">
+    <!-- Card 1: Studio Classes -->
     <article class="item">
       <header>
-        <a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer"
-          ><img
+        <a href="{% url 'timetable' %}">
+          <img
             src="{% static 'core/images/pic01_1.jpg' %}"
-            alt=""
+            alt="Studio Classes"
             width="800"
             height="400"
         /></a>
-        <h3>Beginner Yoga Series</h3>
+        <h3>Studio Classes</h3>
       </header>
       <p>
-        Start your yoga journey with our beginner series. Learn the basics of
-        yoga postures, breathing techniques, and mindfulness meditation.
+        Join Andrea for class. Check the full schedule <a href="{% url 'timetable' %}">here</a> and book your session.
       </p>
       <ul class="actions">
-        <li><a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer" class="button">Learn More</a></li>
+        <li><a href="{% url 'timetable' %}" class="button">View Schedule</a></li>
       </ul>
     </article>
+    
+    <!-- Card 2: Gym Classes and Coaching -->
     <article class="item">
       <header>
-        <a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer"
-          ><img
-            src="{% static 'core/images/pic02_1.jpg' %}"
-            alt=""
+        <a href="{% url 'contact' %}">
+          <img
+            src="{% static 'core/images/barbell.jpg' %}"
+            alt="Gym Classes and Coaching"
             width="800"
             height="400"
         /></a>
-        <h3>Yoga for Flexibility</h3>
+        <h3>Gym Classes and Coaching</h3>
       </header>
       <p>
-        Enhance your flexibility and range of motion with targeted yoga
-        sequences. Perfect for all levels looking to deepen their practice.
+        Experience Andrea's fitness coaching at the gym. Both group classes and bespoke programming sessions are available.
       </p>
       <ul class="actions">
-        <li><a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer" class="button">Discover How</a></li>
+        <li><a href="{% url 'contact' %}" class="button">Learn More</a></li>
       </ul>
     </article>
+    
+    <!-- Card 3: Events & Experiences -->
     <article class="item">
       <header>
-        <a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer"
-          ><img
+        <a href="{% url 'contact' %}">
+          <img
             src="{% static 'core/images/pic03_1.jpg' %}"
-            alt=""
+            alt="Events & Experiences"
             width="800"
             height="400"
         /></a>
-        <h3>Mindfulness & Meditation</h3>
+        <h3>Events & Experiences</h3>
       </header>
       <p>
-        Explore mindfulness and meditation classes to reduce stress, improve
-        mental clarity, and achieve a state of peace and well-being.
+        Host your own yoga-filled special event to celebrate any occasion, a special day out with friends, company off site, zen hen or wedding morning yoga to bring about that calming energy. Create a unique, memorable experience for your special occasions.
       </p>
       <ul class="actions">
-        <li><a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" rel="noopener noreferrer" class="button">Find Peace</a></li>
+        <li><a href="{% url 'contact' %}" class="button">Inquire Now</a></li>
       </ul>
     </article>
+    
+    <!-- Card 4: Workshops -->
     <article class="item">
       <header>
-        <a href="https://www.thefundamentalbody.com" target="_blank" rel="noopener noreferrer"
-          ><img
+        <a href="{% url 'contact' %}">
+          <img
             src="{% static 'core/images/pic04_1.jpg' %}"
-            alt=""
+            alt="Workshops"
             width="800"
             height="400"
         /></a>
-        <h3>Advanced Yoga Workshops</h3>
+        <h3>Workshops</h3>
       </header>
       <p>
-        Deepen your practice with our advanced workshops focusing on specific
-        asanas, pranayama techniques, and yoga philosophy.
+        Simplify your own practice with our workshops - spend time breaking down and building a deeper connection with specific asanas and pranayama practices. Enjoy Nidra meditation and restorative yoga session to create space within.
       </p>
       <ul class="actions">
-        <li><a href="https://www.thefundamentalbody.com" target="_blank" rel="noopener noreferrer" class="button">Advance Your Practice</a></li>
+        <li><a href="{% url 'contact' %}" class="button">Learn More</a></li>
+      </ul>
+    </article>
+    
+    <!-- Card 5: Yoga for Athletes -->
+    <article class="item">
+      <header>
+        <a href="{% url 'contact' %}">
+          <img
+            src="{% static 'core/images/pic02_1.jpg' %}"
+            alt="Yoga for Athletes"
+            width="800"
+            height="400"
+        /></a>
+        <h3>Yoga for Athletes</h3>
+      </header>
+      <p>
+        Specialised yoga sessions designed to aid recovery of athletic performance, prevent injury and improve mobility. Perfect for athletes of all levels looking to compliment their training.
+      </p>
+      <ul class="actions">
+        <li><a href="{% url 'contact' %}" class="button">Enquire Here</a></li>
+      </ul>
+    </article>
+    
+    <!-- Card 6: Breathwork and Meditation -->
+    <article class="item">
+      <header>
+        <a href="{% url 'contact' %}">
+          <img
+            src="{% static 'core/images/pic03_1.jpg' %}"
+            alt="Breathwork and Meditation"
+            width="800"
+            height="400"
+        /></a>
+        <h3>Breathwork and Meditation</h3>
+      </header>
+      <p>
+        Learn powerful breathwork and meditation techniques to cope with the ups and downs of everyday life. Improve focus, mental clarity, and develop the ability to support yourself and others through life's challenges.
+      </p>
+      <ul class="actions">
+        <li><a href="{% url 'contact' %}" class="button">Learn More</a></li>
       </ul>
     </article>
   </section>
