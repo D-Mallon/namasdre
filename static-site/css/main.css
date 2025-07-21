@@ -1628,10 +1628,14 @@ body.is-loading #header.alt .inner {
 
   #header.alt {
     width: 100vw;
-    height: 56.25vw; /* 16:9 ratio for mobile, adjust as needed */
+    height: calc(100vw * 800 / 1067); /* 4:3 aspect ratio */
     min-height: 0;
+    max-width: 100%;
     max-height: 100vh;
-    aspect-ratio: unset;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #222;
   }
 
   #header.alt h1 {
