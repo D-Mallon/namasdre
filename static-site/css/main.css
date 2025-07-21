@@ -1547,34 +1547,72 @@ body.is-loading #header.alt .inner {
   opacity: 0;
 }
 
-/* Large screens - optimize header height for better image display */
-@media screen and (min-width: 1681px) {
+/* Ultra-wide screens - preserve full image width */
+@media screen and (min-width: 1921px) {
   #header.alt {
-    height: clamp(600px, 75vh, 1000px);
+    height: clamp(650px, 78vh, 1100px);
     max-height: 95vh;
   }
 }
 
-@media screen and (max-width: 1680px) and (min-width: 1281px) {
+/* Extra large screens */
+@media screen and (max-width: 1920px) and (min-width: 1681px) {
   #header.alt {
-    height: clamp(550px, 72vh, 900px);
+    height: clamp(620px, 76vh, 1000px);
+    max-height: 92vh;
   }
 }
 
-@media screen and (max-width: 1280px) {
+/* Large desktop screens */
+@media screen and (max-width: 1680px) and (min-width: 1441px) {
+  #header.alt {
+    height: clamp(580px, 74vh, 900px);
+  }
+}
+
+/* Standard desktop screens */
+@media screen and (max-width: 1440px) and (min-width: 1281px) {
+  #header.alt {
+    height: clamp(540px, 72vh, 800px);
+  }
+}
+
+/* Small desktop / large laptop */
+@media screen and (max-width: 1280px) and (min-width: 1025px) {
   #header {
     background-attachment: scroll;
   }
 
   #header.alt {
-    height: clamp(450px, 68vh, 700px);
+    height: clamp(500px, 70vh, 750px);
   }
 }
 
-@media screen and (max-width: 980px) {
+/* Standard laptop screens */
+@media screen and (max-width: 1024px) and (min-width: 981px) {
+  #header {
+    background-attachment: scroll;
+  }
+
   #header.alt {
-    height: clamp(400px, 65vh, 600px);
-    aspect-ratio: 4/3; /* More square ratio for medium screens */
+    height: clamp(460px, 68vh, 700px);
+    aspect-ratio: 5/3; /* Slightly wider ratio */
+  }
+}
+
+/* Tablet landscape */
+@media screen and (max-width: 980px) and (min-width: 769px) {
+  #header.alt {
+    height: clamp(420px, 66vh, 650px);
+    aspect-ratio: 4/3; /* Balanced ratio for tablets */
+  }
+}
+
+/* Tablet portrait / large mobile */
+@media screen and (max-width: 768px) and (min-width: 737px) {
+  #header.alt {
+    height: clamp(380px, 64vh, 600px);
+    aspect-ratio: 3/2; /* Transitioning to mobile ratio */
   }
 }
 
@@ -1584,27 +1622,12 @@ body.is-loading #header.alt .inner {
     background-attachment: scroll;
     background-size: cover;
   }
-  
+
   #header.alt {
     height: clamp(350px, 60vh, 500px);
     min-height: 350px;
     aspect-ratio: 1.5/1; /* More compact for mobile */
   }
-
-  #header.alt h1 {
-    font-size: 2.5em;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  #header.alt p {
-    padding: 0;
-  }
-
-  #header.alt .inner {
-    max-width: 20em;
-  }
-}
 
   #header.alt h1 {
     font-size: 2.5em;
