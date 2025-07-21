@@ -1514,6 +1514,19 @@ table.alt tbody tr td {
   letter-spacing: 0.375rem;
 }
 
+/* Special styling for the Namasdre link in the header */
+#header.alt h1 a {
+  text-decoration: none;
+  border-bottom: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+#header.alt h1 a:hover {
+  color: inherit !important;
+  border-bottom: none;
+}
+
 #header.alt p {
   text-transform: uppercase;
   letter-spacing: 0.325rem;
