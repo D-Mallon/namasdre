@@ -2467,3 +2467,51 @@ td .inline-form {
     aspect-ratio: 3/2; /* Transitioning to mobile ratio */
   }
 }
+
+/* Mobile-specific fixes for header */
+@media screen and (max-width: 736px) {
+  #header,
+  #header.alt {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    height: auto;
+    min-height: 60vh;
+    max-height: 80vh;
+  }
+
+  #header.alt h1 {
+    font-size: 2.5em;
+    padding: 0 0.25em 0.25em 0.25em;
+    border-bottom: solid 2px #ffffff;
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  #header.alt .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2em 1em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #header,
+  #header.alt {
+    min-height: 50vh;
+    max-height: 70vh;
+  }
+
+  #header.alt h1 {
+    font-size: 2em;
+    padding: 0 0.2em 0.2em 0.2em;
+  }
+
+  #header.alt .inner {
+    padding: 1em 0.5em;
+  }
+}
