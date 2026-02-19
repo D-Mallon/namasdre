@@ -34,23 +34,9 @@
       
       <div class="class-list">
         <div class="class-item">
-          <h3>Yoga Studio Classes</h3>
-          <p>Join Andrea on the mat for practice at Breathe Yoga & Pilates</p>
-          <div class="actions">
-            <a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" target="_blank" class="button big">
-              View Timetable
-            </a>
-          </div>
-        </div>
-        
-        <div class="class-item">
-          <h3>Hot Yoga at Reformer One</h3>
-          <p>Join Andrea for hot yoga classes at Reformer One studio, starting September 1st. Morning and evening sessions available.</p>
-          <div class="actions">
-            <a href="https://www.reformerone.ie/reformer-one-timetable" target="_blank" class="button big">
-              View Timetable
-            </a>
-          </div>
+          <h3>Studio Classes</h3>
+          <p>Join Andrea on the mat for practice at <a href="https://backoffice.bsport.io/m/Breathe%20Yoga%20Pilates/277/calendar?tabSelected=0" id="breathe-yoga-link" target="_blank">Breathe Yoga & Pilates</a> on Sundays.</p>
+          <p>Join Andrea for hot yoga classes at Reformer One studio on <a href="https://www.reformerone.ie/reformer-one-timetable" target="_blank">Wednesdays</a> and <a href="https://www.reformerone.ie/reformer-one-timetable" target="_blank">Fridays</a>.</p>
         </div>
         
         <div class="class-item">
@@ -86,5 +72,33 @@
     <script src="js/util.js"></script>
     <script src="js/main.js"></script>
     <script src="js/navbar.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Get today's date
+        const today = new Date();
+        // Get the day of the week (0=Sunday, 1=Monday, ..., 6=Saturday)
+        const dayOfWeek = today.getDay();
+        // Calculate how many days to add to get to the next Sunday
+        const daysUntilSunday = (7 - dayOfWeek) % 7;
+        // Calculate the date of the next Sunday
+        const nextSunday = new Date(today);
+        nextSunday.setDate(today.getDate() + daysUntilSunday);
+
+        // Format the date as YYYY-MM-DD
+        const year = nextSunday.getFullYear();
+        const month = String(nextSunday.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(nextSunday.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+
+        // Get the link element
+        const link = document.getElementById('breathe-yoga-link');
+        if (link) {
+          // Get the base URL
+          const baseUrl = link.href;
+          // Set the new dynamic href
+          link.href = `${baseUrl}&date=${formattedDate}`;
+        }
+      });
+    </script>
   </body>
 </html> 

@@ -37,15 +37,31 @@
       </p>
       
       <div class="contact-info">
-        <h2>Phone Number</h2>
         <p class="contact_paragraphs">
-          <a href="tel:0838342511">083 834 2511</a>
+          Please fill in your details below to get in touch with us. We will get back to you as soon as possible.
         </p>
-
-        <h2>Email</h2>
-        <p class="contact_paragraphs">
-          <a href="mailto:namasdreyoga@gmail.com">namasdreyoga@gmail.com</a>
-        </p>
+        <form action="https://formsubmit.co/namasdreyoga@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Site enquiry form">
+          <div class="row gtr-50">
+            <div class="12u$ form-field">
+              <input type="text" name="name" id="name" value="" placeholder="Name" required>
+            </div>
+            <div class="12u$ form-field">
+              <input type="email" name="email" id="email" value="" placeholder="Email" required>
+            </div>
+            <div class="12u$ form-field">
+              <input type="tel" name="phone" id="phone" value="" placeholder="Phone Number (Optional)">
+            </div>
+            <div class="12u$ form-field">
+              <textarea name="message" id="message" placeholder="Enter your message" rows="6" required></textarea>
+            </div>
+            <div class="12u$">
+              <ul class="actions small align-center">
+                <li><input type="submit" value="Send Message" class="special"></li>
+              </ul>
+            </div>
+          </div>
+        </form>
 
         <h2>See our Insta</h2>
         <ul class="social-icons">
